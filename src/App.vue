@@ -9,15 +9,14 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class fluid>
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="4">
-            <v-card class="mx-auto">
+            <v-card class="mx-auto" >
               <span>Provincia</span>
             </v-card>
           </v-col>
           <v-col cols="8">
-            <v-card class="mx-auto pa-5">
+            <v-card class="mx-auto pa-5" v-if="arrPositivi.length > 0">
               <p class="font-weight-black">Provincia</p>
               <line-chart
                 :chartData="arrPositivi"
@@ -28,7 +27,6 @@
             </v-card>
           </v-col>
         </v-row>
-      </v-container>
     </v-main>
   </v-app>
 </template>
