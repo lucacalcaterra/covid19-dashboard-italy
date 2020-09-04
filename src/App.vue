@@ -1,91 +1,60 @@
 <template>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
-  <v-app id="inspire">
-    <v-app-bar app color="teal" dark>
-      <v-toolbar-title>Monitoraggio Covid 19</v-toolbar-title>
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
-      <v-container class fluid>
-        <v-row align="center" justify="center">
-          <v-col class="text-center" cols="4">
-            <v-card class="mx-auto">
-              <span>Provincia</span>
-            </v-card>
-          </v-col>
-          <v-col cols="8">
-            <v-card class="mx-auto pa-5">
-              <p class="font-weight-black">Provincia</p>
-              <line-chart
-                :chartData="arrPositivi"
-                :options="chartOptions"
-                :chartColors="positiveChartColors"
-                label="Positivi"
-              />
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+      <HelloWorld/>
     </v-main>
-
-    <v-footer color="teal" app>
-      <v-spacer></v-spacer>
-
-      <span
-        class="white--text"
-      >&copy; Ufficio Informatica - Prefettura di Macerata - {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
-import axios from "axios";
-import moment from "moment";
-
-import LineChart from "./components/LineChart";
+import HelloWorld from './components/HelloWorld';
 
 export default {
+  name: 'App',
+
   components: {
-    LineChart,
+    HelloWorld,
   },
-  /* name: "Dashboard",
-  props: {
-    source: String,
-  }, */
+
   data: () => ({
-    drawer: null,
-
-    arrPositivi: [],
-    positiveChartColors: {
-      borderColor: "#077187",
-      pointBorderColor: "#0E1428",
-      pointBackgroundColor: "#AFD6AC",
-      //backgroundColor: "#74A57F"
-    },
-    chartOptions: {
-      responsive: true,
-      maintainAspectRatio: false,
-    },
+    //
   }),
-
-  async created() {
-    const { data } = await axios.get(
-      "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
-    );
-    //const {data} = await axios.get('/db.json')
-    //console.log(data);
-
-    let dataMc = data.filter((elem) => elem.sigla_provincia === "MC");
-    dataMc.forEach((d) => {
-      const date = moment(d.data, "YYYYMMDD").format("DD/MM");
-      const {
-        totale_casi,
-        //totpositivi,
-      } = d;
-
-      // this.arrTotali.push({ date, total: totale_casi });
-      this.arrPositivi.push({ date, total: totale_casi });
-    });
-  },
 };
 </script>
