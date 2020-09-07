@@ -12,16 +12,22 @@
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="4">
           <v-card class="mx-auto">
-            <span>Provincia</span>
+            <v-btn small>Normale</v-btn>
+            <!-- <li v-for="el in  datiProvincia" v-bind:key="el"> {{index }} {{el}}</li>  -->
           </v-card>
         </v-col>
         <v-col cols="8">
-          <v-card class="mx-auto pa-5" v-if="arrPositivi.length > 0">
-            <v-select v-model="defaultprovsel" :items="items" label="Provincia"></v-select>
-            <v-divider class="pa-5" ></v-divider>
+          <v-card class="mx-auto pa-5">
+            <v-select
+              v-model="selProv"
+              :items="items"
+              v-on:change="updDatiProvincia"
+              label="Provincia"
+            ></v-select>
+            <v-divider class="pa-5"></v-divider>
             <p class="font-weight-black">Provincia</p>
             <line-chart
-              :chartData="arrPositivi"
+              :chartData="datiProv"
               :options="chartOptions"
               :chartColors="positiveChartColors"
               label="Positivi"
@@ -49,11 +55,10 @@ export default {
   }, */
   data: () => ({
     //drawer: null,
-    items: [
-      'MC',
-      'PS'
-    ],
-    defaultprovsel: 'MC',
+    items: ["MC", "PU"],
+    selProv: "MC",
+    jsonNaz: [],
+    datiProv: [],
 
     arrPositivi: [],
     positiveChartColors: {
@@ -72,20 +77,27 @@ export default {
     const { data } = await axios.get(
       "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
     );
-    //const {data} = await axios.get('/db.json')
-    //console.log(data);
+    this.jsonNaz = data;
+    
+  },
 
-    let dataMc = data.filter((elem) => elem.sigla_provincia === this.defaultprovsel);
-    dataMc.forEach((d) => {
-      const date = moment(d.data, "YYYYMMDD").format("DD/MM");
-      const {
-        totale_casi,
-        //totpositivi,
-      } = d;
-
-      // this.arrTotali.push({ date, total: totale_casi });
-      this.arrPositivi.push({ date, total: totale_casi });
-    });
+  methods: {
+    updDatiProvincia: function () {
+      this.datiProv=[];
+      const res = this.jsonNaz.filter((elem) => {
+        return elem.sigla_provincia === this.selProv;
+      });
+      res.forEach((d) => {
+        const date = moment(d.data, "YYYYMMDD").format("DD/MM");
+        const {
+          totale_casi,
+          sigla_provincia
+          //totpositivi,
+        } = d;
+        this.datiProv.push({ date, total: totale_casi, prov: sigla_provincia });
+      });
+      console.log (this.datiProv)
+    },
   },
 };
 </script>
