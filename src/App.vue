@@ -21,17 +21,19 @@
             <v-select
               v-model="selProv"
               :items="items"
-              v-on:change="updDatiProvincia"
+              v-on:change="updDatiProvincia()"
               label="Provincia"
             ></v-select>
             <v-divider class="pa-5"></v-divider>
             <p class="font-weight-black">Provincia</p>
-            <line-chart
-              :chartData="datiProv"
-              :options="chartOptions"
-              :chartColors="positiveChartColors"
-              label="Positivi"
-            />
+            <v-card v-if="loaded">
+              <line-chart
+                :chartData="datiProv"
+                :options="chartOptions"
+                :chartColors="positiveChartColors"
+                label="Positivi"
+              />
+            </v-card>
           </v-card>
         </v-col>
       </v-row>
@@ -55,8 +57,9 @@ export default {
   }, */
   data: () => ({
     //drawer: null,
+    loaded: false,
     items: ["MC", "PU"],
-    selProv: "MC",
+    selProv: "",
     jsonNaz: [],
     datiProv: [],
 
@@ -78,12 +81,16 @@ export default {
       "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
     );
     this.jsonNaz = data;
-    
+    this.selProv = "MC";
+  },
+  mounted() {
+    this.loaded = true
+
   },
 
   methods: {
     updDatiProvincia: function () {
-      this.datiProv=[];
+      this.datiProv = [];
       const res = this.jsonNaz.filter((elem) => {
         return elem.sigla_provincia === this.selProv;
       });
@@ -91,12 +98,12 @@ export default {
         const date = moment(d.data, "YYYYMMDD").format("DD/MM");
         const {
           totale_casi,
-          sigla_provincia
+          sigla_provincia,
           //totpositivi,
         } = d;
         this.datiProv.push({ date, total: totale_casi, prov: sigla_provincia });
       });
-      console.log (this.datiProv)
+      //console.log (this.datiProv)
     },
   },
 };

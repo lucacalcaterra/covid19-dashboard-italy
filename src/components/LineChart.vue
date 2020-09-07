@@ -1,49 +1,62 @@
 <script>
-import { Line } from "vue-chartjs";
+import { Line, mixins } from "vue-chartjs";
+const { reactiveProp } = mixins;
 
 export default {
   extends: Line,
+  mixins: [reactiveProp],
   props: {
     label: {
-      type: String
+      type: String,
     },
     chartData: {
-      type: Array
+      type: Array,
     },
     options: {
-      type: Object
+      type: Object,
     },
     chartColors: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   mounted() {
-    const dates = this.chartData.map(d => d.date)//.reverse();
-    const totals = this.chartData.map(d => d.total)//.reverse();  
-    
-    const {
-      borderColor,
-      pointBorderColor,
-      pointBackgroundColor,
-      backgroundColor
-    } = this.chartColors;
+      this.render()
+  },
 
-    this.renderChart(
-      {
-        labels: dates,
-        datasets: [
-          {
-            label: this.label,
-            data: totals,
-            borderColor: borderColor,
-            pointBorderColor: pointBorderColor,
-            pointBackgroundColor: pointBackgroundColor,
-            backgroundColor: backgroundColor
-          }
-        ]
-      },
-      this.options
-    );
-  }
+  methods: {
+    render: function () {
+      const dates = this.chartData.map((d) => d.date); //.reverse();
+      const totals = this.chartData.map((d) => d.total); //.reverse();
+
+      const {
+        borderColor,
+        pointBorderColor,
+        pointBackgroundColor,
+        backgroundColor,
+      } = this.chartColors;
+
+      this.renderChart(
+        {
+          labels: dates,
+          datasets: [
+            {
+              label: this.label,
+              data: totals,
+              borderColor: borderColor,
+              pointBorderColor: pointBorderColor,
+              pointBackgroundColor: pointBackgroundColor,
+              backgroundColor: backgroundColor,
+            },
+          ],
+        },
+        this.options
+      );
+    },
+  },
+  watch: {
+    chartData() {
+        this.render();
+    },
+  },
 };
 </script>
