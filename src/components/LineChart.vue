@@ -1,4 +1,5 @@
 <script>
+
 import { Line, mixins } from "vue-chartjs";
 const { reactiveProp } = mixins;
 
@@ -21,6 +22,7 @@ export default {
   },
   mounted() {
       this.render()
+      //console.log (this.$vuetify.theme.secondary)
   },
 
   methods: {
@@ -46,6 +48,7 @@ export default {
               pointBorderColor: pointBorderColor,
               pointBackgroundColor: pointBackgroundColor,
               backgroundColor: backgroundColor,
+              fill: false
             },
           ],
         },
