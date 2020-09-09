@@ -28,14 +28,15 @@
                 label="Provincia"
               ></v-select>
               <p class="font-weight-black pa-2 pt-5">Provincia</p>
-              <v-card :elevation="1" v-show="this.datiProv.length > 0">
+             <!--  <v-card :elevation="1" v-show="this.datiProv.length > 0">
                 <line-chart
                   :chartData="datiProv"
                   :options="chartOptions"
                   :chartColors="positiveChartColors"
                   label="Positivi"
                 />
-              </v-card>
+              </v-card> -->
+              <chart-province></chart-province>
             </v-card>
           </v-col>
         </v-row>
@@ -49,11 +50,13 @@ import colors from "vuetify/lib/util/colors";
 import axios from "axios";
 import moment from "moment";
 
-import LineChart from "./components/LineChart";
+//import LineChart from "./components/LineChart";
+import ChartProvince from "./components/ChartProvince.vue"
 
 export default {
   components: {
-    LineChart,
+    //LineChart,
+    ChartProvince
   },
   /* name: "Dashboard",
   props: {
