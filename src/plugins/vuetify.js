@@ -10,12 +10,12 @@ export default new Vuetify({
     theme: {
         themes: {
             light: {
-                primary: colors.pink.darken1,
-                secondary: colors.pink.lighten4,
+                primary: colors.pink.darken4,
+                secondary: colors.grey.darken1,
                 accent: '#3ea2fb',
                 error: '#dc3545',
                 petrol: '#17a499',
-                background: colors.grey.lighten5,
+                background: '#F3F3FB',
             }
         },
         options: {

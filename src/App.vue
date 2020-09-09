@@ -9,7 +9,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="fill-height  lighten-5" fluid>
+      <v-container class="fill-height background-white" fluid>
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="4">
             <v-card class="mx-auto">
@@ -18,17 +18,17 @@
             </v-card>
           </v-col>
           <v-col cols="8">
-            <v-card class="mx-auto pa-5" :elevation="16" :shaped=false>
-              <v-card class="mx-auto pa-2">
+            <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
               <v-select
+                outlined
+                hide-details
                 v-model="selProv"
                 :items="items"
                 v-on:change="updDatiProvincia()"
                 label="Provincia"
               ></v-select>
-              </v-card>
               <p class="font-weight-black pa-2 pt-5">Provincia</p>
-              <v-card :elevation="1" v-if="this.datiProv.length > 0">
+              <v-card :elevation="1" v-show="this.datiProv.length > 0">
                 <line-chart
                   :chartData="datiProv"
                   :options="chartOptions"
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import colors from 'vuetify/lib/util/colors'
+import colors from "vuetify/lib/util/colors";
 import axios from "axios";
 import moment from "moment";
 
@@ -61,7 +61,7 @@ export default {
   }, */
   data: () => ({
     //drawer: null,
-    loaded: false,
+    loading: false,
     items: ["MC", "PU"],
     selProv: "",
     jsonNaz: [],
@@ -70,9 +70,9 @@ export default {
     arrPositivi: [],
     positiveChartColors: {
       borderColor: colors.pink.darken1,
-      pointBorderColor: colors.pink.lighten3,
-      pointBackgroundColor: colors.pink.darken1,
-      backgroundColor: colors.pink.lighten5,
+      pointBorderColor: colors.pink.darken1,
+      pointBackgroundColor: colors.pink.lighten2,
+      backgroundColor: colors.green.lighten2,
     },
     chartOptions: {
       responsive: true,
@@ -89,7 +89,7 @@ export default {
     this.updDatiProvincia();
   },
   mounted() {
-    this.loaded = true;
+    this.loading = true;
   },
 
   methods: {
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style>
-#app {
-    background-color: var(--v-background-base);
-}
+/* #app {
+  background-color: var(--v-background-base);
+} */
 </style>
