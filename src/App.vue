@@ -9,7 +9,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="fill-height background-white" fluid>
+      <v-container class="background-white" fluid>
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="4">
             <v-card class="mx-auto">
@@ -28,15 +28,18 @@
                 label="Provincia"
               ></v-select>
               <p class="font-weight-black pa-2 pt-5">Provincia</p>
-             <!--  <v-card :elevation="1" v-show="this.datiProv.length > 0">
+              <!--  <v-card :elevation="1" v-show="this.datiProv.length > 0">
                 <line-chart
                   :chartData="datiProv"
                   :options="chartOptions"
                   :chartColors="positiveChartColors"
                   label="Positivi"
                 />
-              </v-card> -->
-              <chart-province :chartData="datiProv" v-if="datiProv.length > 0"></chart-province>
+              </v-card>-->
+              <div class="vld-parent">
+                <loading :active.sync="isLoading"></loading>
+                <chart-province :chartData="datiProv" ></chart-province>
+              </div>
             </v-card>
           </v-col>
         </v-row>
@@ -50,13 +53,19 @@ import colors from "vuetify/lib/util/colors";
 import axios from "axios";
 import moment from "moment";
 
+// Import component
+import Loading from "vue-loading-overlay";
+// Import stylesheet
+import "vue-loading-overlay/dist/vue-loading.css";
+
 //import LineChart from "./components/LineChart";
-import ChartProvince from "./components/ChartProvince.vue"
+import ChartProvince from "./components/ChartProvince.vue";
 
 export default {
   components: {
     //LineChart,
-    ChartProvince
+    ChartProvince,
+    Loading,
   },
   /* name: "Dashboard",
   props: {
@@ -64,7 +73,7 @@ export default {
   }, */
   data: () => ({
     //drawer: null,
-    loading: false,
+    isLoading: false,
     items: ["MC", "PU"],
     selProv: "",
     jsonNaz: [],
@@ -84,19 +93,26 @@ export default {
   }),
 
   async created() {
-    const { data } = await axios.get(
-      "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
-    );
-    this.jsonNaz = data;
+    await this.getDatiNaz();
     this.selProv = "MC";
-    this.updDatiProvincia();
+    await this.updDatiProvincia();
   },
   mounted() {
-    this.loading = true;
+    this.isLoading=true;
   },
 
   methods: {
+    getDatiNaz: async function () {
+      this.isLoading = true;
+      const { data } = await axios.get(
+        "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
+      );
+      this.jsonNaz = data;
+      this.isLoading = false;
+    },
     updDatiProvincia: function () {
+      this.isLoading = true;
+
       this.datiProv = [];
       const res = this.jsonNaz.filter((elem) => {
         return elem.sigla_provincia === this.selProv;
@@ -111,6 +127,7 @@ export default {
         this.datiProv.push({ date, total: totale_casi, prov: sigla_provincia });
       });
       //console.log (this.datiProv)
+      this.isLoading = false;
     },
   },
 };

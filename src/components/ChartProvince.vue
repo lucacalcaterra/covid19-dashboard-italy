@@ -1,5 +1,7 @@
 <template>
-  <apexchart type="line" height="350" :options="chOptions" :series="chSeries"></apexchart>
+  
+    <apexchart type="line" height="350" :options="chOptions" :series="chSeries"></apexchart>
+  
 </template>
 
 <script>
@@ -15,10 +17,10 @@ export default {
     },
   },
   data: function () {
-    return {};
+    return {
+    };
   },
-  mounted() {
-  },
+  mounted() {},
 
   computed: {
     chOptions: function () {
