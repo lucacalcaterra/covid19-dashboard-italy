@@ -1,48 +1,49 @@
 <template>
-  <div>
-    <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
-  </div>
+  <apexchart type="line" height="350" :options="chOptions" :series="chSeries"></apexchart>
 </template>
 
 <script>
 import VueApexCharts from "vue-apexcharts";
 
 export default {
-    components: {
-        'apexchart': VueApexCharts
+  components: {
+    apexchart: VueApexCharts,
+  },
+  props: {
+    chartData: {
+      type: Array,
     },
-    props: {
-        charttype: {
-            type: String
-        },
-        series: {
-            type: Object
-        }
+  },
+  data: function () {
+    return {};
+  },
+  mounted() {
+  },
 
+  computed: {
+    chOptions: function () {
+      return {
+        ...this.chartOptions,
+        ...{
+          chart: {
+            id: "vuechart-example",
+            animations: {
+              //enabled: false,
+            },
+          },
+          xaxis: {
+            categories: this.chartData.map((d) => d.date),
+          },
+        },
+      };
     },
-  data() {
-    return {
-      chartOptions: {
-        chart: {
-          id: "vuechart-example",
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-        },
-      },
-      series: [
+    chSeries: function () {
+      return [
         {
-          name: "series-1",
-          data: [30, 40, 35, 50, 49, 60, 70, 91],
+          data: this.chartData.map((d) => d.total),
         },
-      ],
-    }
+      ];
     },
-    methods: {
-        updateChart() {
-
-        }
-    }
   },
 };
 </script>

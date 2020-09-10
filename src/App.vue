@@ -36,7 +36,7 @@
                   label="Positivi"
                 />
               </v-card> -->
-              <chart-province></chart-province>
+              <chart-province :chartData="datiProv" v-if="datiProv.length > 0"></chart-province>
             </v-card>
           </v-col>
         </v-row>
