@@ -9,9 +9,9 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="background-white"  fluid>
+      <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
-        <v-row>
+        <v-row justify-center>
           <v-col class="text-center" cols="4">
             <v-card class="mx-auto">
               <v-btn small>Normale</v-btn>
@@ -20,21 +20,26 @@
           </v-col>
           <v-col cols="8">
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
+              <v-card>
+                <v-row class="mx-auto align-center">
+                  <v-col cols="6">
+                    <v-select
+                      v-model="selProv"
+                      :items="items"
+                      v-on:change="updDatiProvincia()"
+                      label="Provincia"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn>Block Button</v-btn>
+                  </v-col>
+                </v-row>
+              </v-card>
 
-              <v-row a>
-              <v-select
-                v-model="selProv"
-                :items="items"
-                v-on:change="updDatiProvincia()"
-                label="Provincia"
-              ></v-select>
-              <v-btn >
-                Block Button
-              </v-btn>
-              </v-row>
-
-              <p class="font-weight-black pa-2 pt-5">Provincia</p>              
-              <chart-province :chartData="datiProv"></chart-province>
+              <v-card outlined class="mt-2">
+                <p class="font-weight-black pa-2 pt-5">Provincia</p>
+                <chart-province :chartData="datiProv"></chart-province>
+              </v-card>
             </v-card>
           </v-col>
         </v-row>
