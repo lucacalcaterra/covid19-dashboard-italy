@@ -9,9 +9,9 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="background-white" fluid>
+      <v-container class="background-white"  fluid>
         <loading :active.sync="isLoading"></loading>
-        <v-row align="center" justify="center">
+        <v-row>
           <v-col class="text-center" cols="4">
             <v-card class="mx-auto">
               <v-btn small>Normale</v-btn>
@@ -20,23 +20,21 @@
           </v-col>
           <v-col cols="8">
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
-              <v-select                
+
+              <v-row a>
+              <v-select
                 v-model="selProv"
                 :items="items"
                 v-on:change="updDatiProvincia()"
                 label="Provincia"
               ></v-select>
-              <p class="font-weight-black pa-2 pt-5">Provincia</p>
-              <!--  <v-card :elevation="1" v-show="this.datiProv.length > 0">
-                <line-chart
-                  :chartData="datiProv"
-                  :options="chartOptions"
-                  :chartColors="positiveChartColors"
-                  label="Positivi"
-                />
-              </v-card>-->
-                
-                <chart-province :chartData="datiProv" ></chart-province>
+              <v-btn >
+                Block Button
+              </v-btn>
+              </v-row>
+
+              <p class="font-weight-black pa-2 pt-5">Provincia</p>              
+              <chart-province :chartData="datiProv"></chart-province>
             </v-card>
           </v-col>
         </v-row>
@@ -134,5 +132,4 @@ export default {
 /* #app {
   background-color: var(--v-background-base);
 } */
-
 </style>
