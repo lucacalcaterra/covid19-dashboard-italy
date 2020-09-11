@@ -20,9 +20,7 @@
           </v-col>
           <v-col cols="8">
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
-              <v-select
-                outlined
-                hide-details
+              <v-select                
                 v-model="selProv"
                 :items="items"
                 v-on:change="updDatiProvincia()"
