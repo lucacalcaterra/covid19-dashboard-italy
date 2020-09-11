@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 
-import colors from 'vuetify/lib/util/colors'
+//import colors from 'vuetify/lib/util/colors'
 
 
 Vue.use(Vuetify);
 
 export default new Vuetify({
-    theme: {
+    /* theme: {
         themes: {
             light: {
                 primary: colors.pink.darken4,
@@ -21,5 +21,5 @@ export default new Vuetify({
         options: {
             customProperties: true
         },
-    }
+    } */
 });

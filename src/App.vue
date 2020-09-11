@@ -10,6 +10,7 @@
 
     <v-main>
       <v-container class="background-white" fluid>
+        <loading :active.sync="isLoading"></loading>
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="4">
             <v-card class="mx-auto">
@@ -36,10 +37,8 @@
                   label="Positivi"
                 />
               </v-card>-->
-              <div class="vld-parent">
-                <loading :active.sync="isLoading"></loading>
+                
                 <chart-province :chartData="datiProv" ></chart-province>
-              </div>
             </v-card>
           </v-col>
         </v-row>
@@ -98,7 +97,7 @@ export default {
     await this.updDatiProvincia();
   },
   mounted() {
-    this.isLoading=true;
+    //this.isLoading=true;
   },
 
   methods: {
@@ -137,4 +136,5 @@ export default {
 /* #app {
   background-color: var(--v-background-base);
 } */
+
 </style>
