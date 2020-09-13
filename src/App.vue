@@ -20,21 +20,21 @@
           </v-col>
           <v-col cols="8">
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
-              <v-card>
-                <v-row class="mx-auto align-center">
-                  <v-col cols="6">
-                    <v-select
-                      v-model="selProv"
-                      :items="items"
-                      v-on:change="updDatiProvincia()"
-                      label="Provincia"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-btn>Block Button</v-btn>
-                  </v-col>
-                </v-row>
-              </v-card>
+              <v-row class="mx-auto align-center">
+                <v-col cols="6">
+                  <v-select
+                    v-model="selProv"
+                    :items="items"
+                    v-on:change="updDatiProvincia()"
+                    label="Provincia"
+                  ></v-select>
+                </v-col>
+                <v-col cols="6">
+                  <v-chip-group v-on:change="updPeriodo()" v-model="selPeriodo" active-class="primary--text " mandatory>
+                    <v-chip v-for="periodo in periodi" :key="periodo">{{ periodo }}</v-chip>
+                  </v-chip-group>
+                </v-col>
+              </v-row>
 
               <v-card outlined class="mt-2">
                 <p class="font-weight-black pa-2 pt-5">Provincia</p>
@@ -76,6 +76,8 @@ export default {
     isLoading: false,
     items: ["MC", "PU"],
     selProv: "",
+    selPeriodo: "",
+    periodi: ["1 Sett.", "1 Mese", "3 Mesi"],
     jsonNaz: [],
     datiProv: [],
 
@@ -128,6 +130,17 @@ export default {
       });
       //console.log (this.datiProv)
       this.isLoading = false;
+    },
+    updPeriodo: function () {
+      switch (this.selPeriodo) {
+        case 0:
+          console.log(moment().startOf('day').subtract(1,'week'))
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+      }
     },
   },
 };
