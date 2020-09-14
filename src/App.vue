@@ -62,6 +62,7 @@ import colors from "vuetify/lib/util/colors";
 import axios from "axios";
 import moment from "moment";
 
+
 // Import component
 import Loading from "vue-loading-overlay";
 // Import stylesheet
@@ -104,6 +105,8 @@ export default {
   }),
 
   async created() {
+    this.$root.$moment.locale("it");
+
     await this.getDatiNaz();
     this.getProvince();
     await this.updDatiProvincia();
@@ -150,7 +153,7 @@ export default {
         return elem.denominazione_provincia === this.selProv;
       });
       res.forEach((d) => {
-        const date = moment(d.data, "YYYYMMDD").format("DD/MM");
+        const date = moment(d.data, "YYYYMMDD").format("MMM D YY");
         const {
           totale_casi,
           denominazione_provincia,

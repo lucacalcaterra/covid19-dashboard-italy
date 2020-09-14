@@ -30,11 +30,13 @@ export default {
           chart: {
             id: "vuechart-example",
             type: 'area',
-            animations: {
-              //enabled: false,
-            },
+            /* animations: {
+              enabled: false,
+            }, */
             zoom: {
-              enabled: false
+              enabled: false,
+              autoScaleYaxis: true
+
             }
           },
           fill: {
@@ -42,16 +44,18 @@ export default {
               gradient: {
                 shadeIntensity: 1,
                 inverseColors: false,
-                opacityFrom: 0.5,
-                opacityTo: 0,
-                stops: [0, 90, 100]
+                opacityFrom: 0.3,
+                opacityTo: 0.2,
+                stops: [ 800,2000]
               },
             },
           stroke: {
               curve: 'smooth'
             },
           xaxis: {
+            type: 'datetime',
             categories: this.chartData.map((d) => d.date),
+            tickAmount: 6,
           },
         },
       };
