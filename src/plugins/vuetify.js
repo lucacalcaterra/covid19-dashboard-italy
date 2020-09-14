@@ -6,6 +6,8 @@ import Vuetify from 'vuetify/lib';
 
 Vue.use(Vuetify);
 
+import it from 'vuetify/es5/locale/it'
+
 export default new Vuetify({
     /* theme: {
         themes: {
@@ -22,4 +24,8 @@ export default new Vuetify({
             customProperties: true
         },
     } */
+    lang: {
+        locales: { it },
+        current: 'it'
+    }
 });

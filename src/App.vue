@@ -22,11 +22,13 @@
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
               <v-row class="mx-auto align-center">
                 <v-col cols="6">
-                  <v-autocomplete   
-                    solo                                     
+                  <v-autocomplete
+                    solo
                     hide-details
                     v-model="selProv"
-                    :items="items"
+                    :items="province"
+                    item-key="key"
+                    item-value="denominazione_provincia"
                     v-on:change="updDatiProvincia()"
                     label="Provincia"
                   ></v-autocomplete>
@@ -81,8 +83,8 @@ export default {
   data: () => ({
     //drawer: null,
     isLoading: false,
-    items: ["MC", "PU"],
-    selProv: "",
+    province: [],
+    selProv: "Macerata",
     selPeriodo: "",
     periodi: ["1 Sett.", "1 Mese", "3 Mesi"],
     jsonNaz: [],
@@ -103,7 +105,7 @@ export default {
 
   async created() {
     await this.getDatiNaz();
-    this.selProv = "MC";
+    this.getProvince();
     await this.updDatiProvincia();
   },
   mounted() {
@@ -119,21 +121,46 @@ export default {
       this.jsonNaz = data;
       this.isLoading = false;
     },
+    getProvince: function () {
+      const res = [
+        ...new Set(
+          this.jsonNaz
+            .filter((el) => el.denominazione_provincia != null)
+            .filter(
+              (el) =>
+                el.denominazione_provincia !==
+                "In fase di definizione/aggiornamento"
+            )
+            .filter(
+              (el) =>
+                el.denominazione_provincia !==
+                "Fuori Regione / Provincia Autonoma"
+            )
+            .map((el) => el.denominazione_provincia)
+        ),
+      ].sort();
+      console.log(res);
+      this.province = res;
+    },
     updDatiProvincia: function () {
       this.isLoading = true;
 
       this.datiProv = [];
       const res = this.jsonNaz.filter((elem) => {
-        return elem.sigla_provincia === this.selProv;
+        return elem.denominazione_provincia === this.selProv;
       });
       res.forEach((d) => {
         const date = moment(d.data, "YYYYMMDD").format("DD/MM");
         const {
           totale_casi,
-          sigla_provincia,
+          denominazione_provincia,
           //totpositivi,
         } = d;
-        this.datiProv.push({ date, total: totale_casi, prov: sigla_provincia });
+        this.datiProv.push({
+          date,
+          total: totale_casi,
+          prov: denominazione_provincia,
+        });
       });
       //console.log (this.datiProv)
       this.isLoading = false;
