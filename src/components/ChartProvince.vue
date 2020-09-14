@@ -34,8 +34,8 @@ export default {
               enabled: false,
             }, */
             zoom: {
-              enabled: false,
-              autoScaleYaxis: true
+              //enabled: false,
+              //autoScaleYaxis: true
 
             }
           },
@@ -53,7 +53,7 @@ export default {
               curve: 'smooth'
             },
           xaxis: {
-            type: 'datetime',
+            type: 'date',
             categories: this.chartData.map((d) => d.date),
             tickAmount: 6,
           },

@@ -47,7 +47,7 @@
 
               <v-card outlined class="mt-2">
                 <p class="font-weight-black pa-2 pt-5">Provincia</p>
-                <chart-province :chartData="datiProv"></chart-province>
+                <chart-province ref="chartprovince" :chartData="datiProv"></chart-province>
               </v-card>
             </v-card>
           </v-col>
@@ -105,7 +105,7 @@ export default {
   }),
 
   async created() {
-    this.$root.$moment.locale("it");
+    moment.locale("it");
 
     await this.getDatiNaz();
     this.getProvince();
@@ -142,7 +142,6 @@ export default {
             .map((el) => el.denominazione_provincia)
         ),
       ].sort();
-      console.log(res);
       this.province = res;
     },
     updDatiProvincia: function () {
@@ -153,7 +152,7 @@ export default {
         return elem.denominazione_provincia === this.selProv;
       });
       res.forEach((d) => {
-        const date = moment(d.data, "YYYYMMDD").format("MMM D YY");
+        const date = moment(d.data, "YYYYMMDD").format("DD MMM YY");
         const {
           totale_casi,
           denominazione_provincia,
@@ -170,9 +169,14 @@ export default {
     },
     updPeriodo: function () {
       switch (this.selPeriodo) {
-        case 0:
-          console.log(moment().startOf("day").subtract(1, "week"));
+        case 0: {
+          const start = moment().startOf("day").subtract(1, "week").format("DD MMM YY")
+          const end = moment().format("DD MMM YY")
+          //console.log(start.format("DD MMM YY"))
+          //console.log(end)
+          this.$refs.chartprovince.zoomX(start,end)
           break;
+        }
         case 1:
           break;
         case 2:
