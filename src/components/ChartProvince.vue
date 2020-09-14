@@ -29,10 +29,27 @@ export default {
         ...{
           chart: {
             id: "vuechart-example",
+            type: 'area',
             animations: {
               //enabled: false,
             },
+            zoom: {
+              enabled: false
+            }
           },
+          fill: {
+              type: 'gradient',
+              gradient: {
+                shadeIntensity: 1,
+                inverseColors: false,
+                opacityFrom: 0.5,
+                opacityTo: 0,
+                stops: [0, 90, 100]
+              },
+            },
+          stroke: {
+              curve: 'smooth'
+            },
           xaxis: {
             categories: this.chartData.map((d) => d.date),
           },
@@ -42,6 +59,7 @@ export default {
     chSeries: function () {
       return [
         {
+          name: 'Positivi',
           data: this.chartData.map((d) => d.total),
         },
       ];

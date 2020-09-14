@@ -22,15 +22,22 @@
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
               <v-row class="mx-auto align-center">
                 <v-col cols="6">
-                  <v-select
+                  <v-autocomplete   
+                    solo                                     
+                    hide-details
                     v-model="selProv"
                     :items="items"
                     v-on:change="updDatiProvincia()"
                     label="Provincia"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-col>
                 <v-col cols="6">
-                  <v-chip-group v-on:change="updPeriodo()" v-model="selPeriodo" active-class="primary--text " mandatory>
+                  <v-chip-group
+                    v-on:change="updPeriodo()"
+                    v-model="selPeriodo"
+                    active-class="primary--text"
+                    mandatory
+                  >
                     <v-chip v-for="periodo in periodi" :key="periodo">{{ periodo }}</v-chip>
                   </v-chip-group>
                 </v-col>
@@ -134,7 +141,7 @@ export default {
     updPeriodo: function () {
       switch (this.selPeriodo) {
         case 0:
-          console.log(moment().startOf('day').subtract(1,'week'))
+          console.log(moment().startOf("day").subtract(1, "week"));
           break;
         case 1:
           break;
