@@ -165,6 +165,9 @@ export default {
       });
       //console.log (this.datiProv)
       this.isLoading = false;
+      this.selPeriodo = 0;
+      this.$refs.chartprovince.$refs.chart.resetSeries(true, true);
+
     },
     updPeriodo: function () {
       switch (this.selPeriodo) {
