@@ -1,6 +1,6 @@
 <template>
   
-    <apexchart type="line" height="350" :options="chOptions" :series="chSeries"></apexchart>
+    <apexchart type="area" ref="chart" height="350" :options="chOptions" :series="chSeries"></apexchart>
   
 </template>
 
@@ -28,18 +28,25 @@ export default {
         ...this.chartOptions,
         ...{
           chart: {
-            id: "vuechart-example",
+            //id: "vuechart-example",
             type: 'area',
             /* animations: {
               enabled: false,
             }, */
             zoom: {
-              //enabled: false,
-              //autoScaleYaxis: true
+              enabled: false,
+              autoScaleYaxis: true
 
             }
           },
-          fill: {
+          dataLabels: {
+              enabled: false
+            },
+          markers: {
+              size: 0,
+              style: 'hollow',
+            },
+          /* fill: {
               type: 'gradient',
               gradient: {
                 shadeIntensity: 1,
@@ -48,14 +55,16 @@ export default {
                 opacityTo: 0.2,
                 stops: [ 800,2000]
               },
-            },
+            }, */
           stroke: {
               curve: 'smooth'
             },
           xaxis: {
-            type: 'date',
+            type: 'datetime',            
             categories: this.chartData.map((d) => d.date),
-            tickAmount: 6,
+            
+            //tickAmount: 6,
+
           },
         },
       };

@@ -62,7 +62,6 @@ import colors from "vuetify/lib/util/colors";
 import axios from "axios";
 import moment from "moment";
 
-
 // Import component
 import Loading from "vue-loading-overlay";
 // Import stylesheet
@@ -87,7 +86,7 @@ export default {
     province: [],
     selProv: "Macerata",
     selPeriodo: "",
-    periodi: ["1 Sett.", "1 Mese", "3 Mesi"],
+    periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi","6 Mesi"],
     jsonNaz: [],
     datiProv: [],
 
@@ -152,7 +151,7 @@ export default {
         return elem.denominazione_provincia === this.selProv;
       });
       res.forEach((d) => {
-        const date = moment(d.data, "YYYYMMDD").format("DD MMM YY");
+        const date = moment(d.data, "YYYYMMDD").format();
         const {
           totale_casi,
           denominazione_provincia,
@@ -170,17 +169,33 @@ export default {
     updPeriodo: function () {
       switch (this.selPeriodo) {
         case 0: {
-          const start = moment().startOf("day").subtract(1, "week").format("DD MMM YY")
-          const end = moment().format("DD MMM YY")
-          //console.log(start.format("DD MMM YY"))
-          //console.log(end)
-          this.$refs.chartprovince.zoomX(start,end)
+          this.$refs.chartprovince.$refs.chart.resetSeries(true, true);
           break;
         }
-        case 1:
+        case 1: {
+          const start = moment().startOf("day").subtract(1, "week").valueOf();
+          const end = moment().subtract(1, "day").valueOf();
+          this.$refs.chartprovince.$refs.chart.zoomX(start, end);
           break;
-        case 2:
+        }
+        case 2: {
+          const start = moment().startOf("day").subtract(1, "month").valueOf();
+          const end = moment().subtract(1, "day").valueOf();
+          this.$refs.chartprovince.$refs.chart.zoomX(start, end);
           break;
+        }
+        case 3: {
+          const start = moment().startOf("day").subtract(3, "month").valueOf();
+          const end = moment().subtract(1, "day").valueOf();
+          this.$refs.chartprovince.$refs.chart.zoomX(start, end);
+          break;
+        }
+        case 4: {
+          const start = moment().startOf("day").subtract(6, "month").valueOf();
+          const end = moment().subtract(1, "day").valueOf();
+          this.$refs.chartprovince.$refs.chart.zoomX(start, end);
+          break;
+        }
       }
     },
   },
