@@ -1,7 +1,7 @@
 <template>
 
-  <div>
-    <div style="height: 200px overflow: auto;">
+  <div style="height: 100%; width: 100%">
+    <!-- <div style="height: 200px overflow: auto;">
       <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
       <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
       <button @click="showLongText">
@@ -10,7 +10,7 @@
       <button @click="showMap = !showMap">
         Toggle map
       </button>
-    </div>
+    </div> -->
     <l-map
       v-if="showMap"
       :zoom="zoom"
@@ -37,13 +37,10 @@
         </l-popup>
       </l-marker>
       <l-circle-marker v-for="(marker,index) in markers" :key="index" :lat-lng="marker">
-        <l-tooltip :options="{ permanent: true, interactive: true }">
+        <l-tooltip :options="{ permanent: false, interactive: false }">
           <div @click="innerClick">
             I am a tooltip
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
+            <p v-show="showParagraph">              
             </p>
           </div>
         </l-tooltip>
@@ -56,7 +53,7 @@
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LCircleMarker, LPopup, LTooltip } from "vue2-leaflet";
 export default {
-  name: "Example",
+  name: "MappaItalia",
   components: {
     LMap,
     LTileLayer,
@@ -64,6 +61,11 @@ export default {
     LCircleMarker,
     LPopup,
     LTooltip
+  },
+  props: {
+    datiProv: {
+      type: Array,
+    },
   },
   data() {
     return {
@@ -100,6 +102,11 @@ export default {
     innerClick() {
       alert("Click!");
     }
+  },
+  mounted () {
+    this.datiProv.forEach((d) => {
+      this.markers.push(latLng(d.lat,d.long))
+    })
   }
 };
 </script>

@@ -12,12 +12,12 @@
       <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
         <v-row justify-center>
-          <v-col class="text-center" cols="4">
-            <v-responsive>
-                <italy-map></italy-map>
-            </v-responsive>
+          <v-col class="text-center"  md="4" sm="12">
+            <v-card height="670px" class="mx-auto pa-2" :elevation="16" :shaped="false">
+                <italy-map :datiProv="province"></italy-map>
+            </v-card>
           </v-col>
-          <v-col cols="8">
+          <v-col md="8" sm="12">
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
               <v-row class="mx-auto align-center">
                 <v-col cols="6">
