@@ -13,10 +13,9 @@
         <loading :active.sync="isLoading"></loading>
         <v-row justify-center>
           <v-col class="text-center" cols="4">
-            <v-card class="mx-auto">
-              <v-btn small>Normale</v-btn>
-              <!-- <li v-for="el in  datiProvincia" v-bind:key="el"> {{index }} {{el}}</li>  -->
-            </v-card>
+            <v-responsive>
+                <italy-map></italy-map>
+            </v-responsive>
           </v-col>
           <v-col cols="8">
             <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
@@ -68,11 +67,13 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 
 //import LineChart from "./components/LineChart";
+import ItalyMap from "./components/ItalyMap";
 import ChartProvince from "./components/ChartProvince.vue";
 
 export default {
   components: {
     //LineChart,
+    ItalyMap,
     ChartProvince,
     Loading,
   },
@@ -86,7 +87,7 @@ export default {
     province: [],
     selProv: "Macerata",
     selPeriodo: "",
-    periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi","6 Mesi"],
+    periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi", "6 Mesi"],
     jsonNaz: [],
     datiProv: [],
 
@@ -167,7 +168,6 @@ export default {
       this.isLoading = false;
       this.selPeriodo = 0;
       this.$refs.chartprovince.$refs.chart.resetSeries(true, true);
-
     },
     updPeriodo: function () {
       switch (this.selPeriodo) {
