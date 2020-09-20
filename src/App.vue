@@ -9,12 +9,12 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="background-white" fluid>
+      <v-container  class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
         <v-row justify-center>
           <v-col class="text-center"  md="4" sm="12">
-            <v-card height="670px" class="mx-auto pa-2" :elevation="16" :shaped="false">
-                <italy-map :datiProv="province"></italy-map>
+            <v-card   class="mx-auto pa-2" :elevation="16" :shaped="false">
+                <italy-map v-if="!isLoading" :datiProv="jsonProvinceLatest"></italy-map>
             </v-card>
           </v-col>
           <v-col md="8" sm="12">
@@ -88,7 +88,8 @@ export default {
     selProv: "Macerata",
     selPeriodo: "",
     periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi", "6 Mesi"],
-    jsonNaz: [],
+    jsonProvince: [],
+    jsonProvinceLatest: [],
     datiProv: [],
 
     arrPositivi: [],
@@ -118,16 +119,25 @@ export default {
   methods: {
     getDatiNaz: async function () {
       this.isLoading = true;
-      const { data } = await axios.get(
+      let { data:tmpJsonProvince } = await axios.get(
         "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
       );
-      this.jsonNaz = data;
+      this.jsonProvince = tmpJsonProvince;
+
+      let  { data:tmpJsonProvinceLatest } = await axios.get(
+        "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province-latest.json"
+      )      
+
+      this.jsonProvinceLatest = tmpJsonProvinceLatest.filter(
+              (el) =>
+                el.lat != null
+            );
       this.isLoading = false;
-    },
+    },    
     getProvince: function () {
       const res = [
         ...new Set(
-          this.jsonNaz
+          this.jsonProvince
             .filter((el) => el.denominazione_provincia != null)
             .filter(
               (el) =>
@@ -148,7 +158,7 @@ export default {
       this.isLoading = true;
 
       this.datiProv = [];
-      const res = this.jsonNaz.filter((elem) => {
+      const res = this.jsonProvince.filter((elem) => {
         return elem.denominazione_provincia === this.selProv;
       });
       res.forEach((d) => {
@@ -201,6 +211,7 @@ export default {
         }
       }
     },
+   
   },
 };
 </script>

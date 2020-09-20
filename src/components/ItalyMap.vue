@@ -1,6 +1,6 @@
 <template>
 
-  <div style="height: 100%; width: 100%">
+  <v-card height="500px">
     <!-- <div style="height: 200px overflow: auto;">
       <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
       <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
@@ -12,11 +12,10 @@
       </button>
     </div> -->
     <l-map
-      v-if="showMap"
       :zoom="zoom"
       :center="center"
       :options="mapOptions"
-      style="height: 100%"
+      style=""
       @update:center="centerUpdate"
       @update:zoom="zoomUpdate"
     >
@@ -24,7 +23,7 @@
         :url="url"
         :attribution="attribution"
       />
-      <l-marker :lat-lng="withPopup">
+      <l-marker  :lat-lng="withPopup">
         <l-popup>
           <div @click="innerClick">
             I am a popup
@@ -46,7 +45,7 @@
         </l-tooltip>
       </l-circle-marker>
     </l-map>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -69,7 +68,7 @@ export default {
   },
   data() {
     return {
-      zoom: 6.2,
+      zoom: 5,
       center: latLng(42.146902, 12.502441),
       url: 'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png',
       attribution:
@@ -84,8 +83,8 @@ export default {
       },
       showMap: true,
       markers: [
-        latLng( 42.35122196, 13.39843823),
-        latLng( 40.63947052, 15.80514834)
+        //latLng( 42.35122196, 13.39843823),
+        //latLng( 40.63947052, 15.80514834)
       ]
     };
   },
@@ -103,9 +102,10 @@ export default {
       alert("Click!");
     }
   },
-  mounted () {
+  created () {    
     this.datiProv.forEach((d) => {
       this.markers.push(latLng(d.lat,d.long))
+      //console.log(d)
     })
   }
 };
