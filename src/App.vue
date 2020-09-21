@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark style="z-index:1001">
       <div class="d-flex align-center">
         <v-toolbar-title>Monitoraggio Covid 19</v-toolbar-title>
       </div>
@@ -9,16 +9,24 @@
     </v-app-bar>
 
     <v-main>
-      <v-container  class="background-white" fluid>
+      <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
         <v-row justify-center>
-          <v-col class="text-center"  md="4" sm="12">
-            <v-card   class="mx-auto pa-2" :elevation="16" :shaped="false">
-                <italy-map v-if="!isLoading" :datiProv="jsonProvinceLatest"></italy-map>
+          <v-col class="text-center" md="4" sm="12">
+
+            <v-card
+              height="550px"
+              width="auto"
+              class="mx-auto pa-2"
+              :elevation="16"
+              :shaped="false"
+            >
+              
+              <italy-map v-if="!isLoading" :datiProv="jsonProvinceLatest"></italy-map>
             </v-card>
           </v-col>
           <v-col md="8" sm="12">
-            <v-card class="mx-auto pa-5" :elevation="16" :shaped="false">
+            <v-card height="550px" class="mx-auto pa-5" :elevation="16" :shaped="false">
               <v-row class="mx-auto align-center">
                 <v-col cols="6">
                   <v-autocomplete
@@ -119,21 +127,20 @@ export default {
   methods: {
     getDatiNaz: async function () {
       this.isLoading = true;
-      let { data:tmpJsonProvince } = await axios.get(
+      let { data: tmpJsonProvince } = await axios.get(
         "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
       );
       this.jsonProvince = tmpJsonProvince;
 
-      let  { data:tmpJsonProvinceLatest } = await axios.get(
+      let { data: tmpJsonProvinceLatest } = await axios.get(
         "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province-latest.json"
-      )      
+      );
 
       this.jsonProvinceLatest = tmpJsonProvinceLatest.filter(
-              (el) =>
-                el.lat != null
-            );
+        (el) => el.lat != null
+      );
       this.isLoading = false;
-    },    
+    },
     getProvince: function () {
       const res = [
         ...new Set(
@@ -211,7 +218,6 @@ export default {
         }
       }
     },
-   
   },
 };
 </script>

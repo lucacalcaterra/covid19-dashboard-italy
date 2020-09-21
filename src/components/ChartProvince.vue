@@ -1,7 +1,5 @@
 <template>
-  
-    <apexchart type="area" ref="chart" height="350px" :options="chOptions" :series="chSeries"></apexchart>
-  
+  <apexchart type="area" ref="chart" height="350px" :options="chOptions" :series="chSeries"></apexchart>
 </template>
 
 <script>
@@ -17,8 +15,7 @@ export default {
     },
   },
   data: function () {
-    return {
-    };
+    return {};
   },
   mounted() {},
 
@@ -29,23 +26,22 @@ export default {
         ...{
           chart: {
             //id: "vuechart-example",
-            type: 'area',
+            type: "area",
             /* animations: {
               enabled: false,
             }, */
             zoom: {
               enabled: false,
-              autoScaleYaxis: true
-
-            }
+              autoScaleYaxis: true,
+            },
           },
           dataLabels: {
-              enabled: false
-            },
+            enabled: false,
+          },
           markers: {
-              size: 0,
-              style: 'hollow',
-            },
+            size: 0,
+            style: "hollow",
+          },
           /* fill: {
               type: 'gradient',
               gradient: {
@@ -57,14 +53,13 @@ export default {
               },
             }, */
           stroke: {
-              curve: 'smooth'
-            },
+            curve: "smooth",
+          },
           xaxis: {
-            type: 'datetime',            
+            type: "datetime",
             categories: this.chartData.map((d) => d.date),
-            
-            //tickAmount: 6,
 
+            //tickAmount: 6,
           },
         },
       };
@@ -72,7 +67,7 @@ export default {
     chSeries: function () {
       return [
         {
-          name: 'Positivi',
+          name: "Positivi",
           data: this.chartData.map((d) => d.total),
         },
       ];
