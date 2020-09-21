@@ -26,7 +26,7 @@
             @update:zoom="zoomUpdate"
           >
             <l-tile-layer :url="url" :attribution="attribution" />
-            <l-marker :lat-lng="withPopup">
+<!--             <l-marker :lat-lng="withPopup">
               <l-popup>
                 <div @click="innerClick">
                   I am a popup
@@ -37,12 +37,13 @@
                   </p>
                 </div>
               </l-popup>
-            </l-marker>
+            </l-marker> -->
             <l-circle-marker              
               v-for="(marker,index) in markers"
               :key="index"
               :lat-lng="marker.latlng"
-              :radius="marker.intensita"
+              :radius="5"
+              :color='LightenDarkenColor("#F06D06",marker.intensita)'
             >
               <l-tooltip :options="{ permanent: false, interactive: false }">
                 <div @click="innerClick">
@@ -63,9 +64,7 @@ import { latLng } from "leaflet";
 import {
   LMap,
   LTileLayer,
-  LMarker,
   LCircleMarker,
-  LPopup,
   LTooltip,
 } from "vue2-leaflet";
 
@@ -74,9 +73,7 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    LMarker,
     LCircleMarker,
-    LPopup,
     LTooltip,
   },
   props: {
@@ -121,6 +118,43 @@ export default {
     innerClick() {
       alert("Click!");
     },
+    
+    LightenDarkenColor(colorCode, amount) {
+    var usePound = false;
+ 
+    if (colorCode[0] == "#") {
+        colorCode = colorCode.slice(1);
+        usePound = true;
+    }
+ 
+    var num = parseInt(colorCode, 16);
+ 
+    var r = (num >> 16) + amount;
+ 
+    if (r > 255) {
+        r = 255;
+    } else if (r < 0) {
+        r = 0;
+    }
+ 
+    var b = ((num >> 8) & 0x00FF) + amount;
+ 
+    if (b > 255) {
+        b = 255;
+    } else if (b < 0) {
+        b = 0;
+    }
+ 
+    var g = (num & 0x0000FF) + amount;
+ 
+    if (g > 255) {
+        g = 255;
+    } else if (g < 0) {
+        g = 0;
+    }
+ 
+    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+}
   },
   computed: {
     //utility per calcoli
@@ -145,7 +179,7 @@ export default {
     });
     // aggiunge intensità marker
     this.markers.forEach((d) => {
-      d.intensita= ((10*d.totale_casi)/this.maxValContagi);      
+      d.intensita= ((30*d.totale_casi)/this.maxValContagi);      
     });
             
 
