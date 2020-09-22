@@ -42,7 +42,7 @@
               v-for="(marker,index) in markers"
               :key="index"
               :lat-lng="marker.latlng"
-              :radius="5"
+              :radius="2"
               :color='LightenDarkenColor("#F06D06",marker.intensita)'
             >
               <l-tooltip :options="{ permanent: false, interactive: false }">
@@ -52,6 +52,8 @@
                 </div>
               </l-tooltip>
             </l-circle-marker>
+            <Vue2LeafletHeatmap :lat-lng="heatArr" :max="maxValContagi" :radius="11" :min-opacity="0.85" :max-zoom="12" :blur="12"></Vue2LeafletHeatmap>
+
           </l-map>
         </v-card>
       </v-tab-item>
@@ -67,6 +69,8 @@ import {
   LCircleMarker,
   LTooltip,
 } from "vue2-leaflet";
+import Vue2LeafletHeatmap from 'vue2-leaflet-heatmap/Vue2LeafletHeatmap'
+
 
 export default {
   name: "MappaItalia",
@@ -75,6 +79,7 @@ export default {
     LTileLayer,
     LCircleMarker,
     LTooltip,
+    Vue2LeafletHeatmap
   },
   props: {
     datiProv: {
@@ -117,44 +122,7 @@ export default {
     },
     innerClick() {
       alert("Click!");
-    },
-    
-    LightenDarkenColor(colorCode, amount) {
-    var usePound = false;
- 
-    if (colorCode[0] == "#") {
-        colorCode = colorCode.slice(1);
-        usePound = true;
-    }
- 
-    var num = parseInt(colorCode, 16);
- 
-    var r = (num >> 16) + amount;
- 
-    if (r > 255) {
-        r = 255;
-    } else if (r < 0) {
-        r = 0;
-    }
- 
-    var b = ((num >> 8) & 0x00FF) + amount;
- 
-    if (b > 255) {
-        b = 255;
-    } else if (b < 0) {
-        b = 0;
-    }
- 
-    var g = (num & 0x0000FF) + amount;
- 
-    if (g > 255) {
-        g = 255;
-    } else if (g < 0) {
-        g = 0;
-    }
- 
-    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
-}
+    },        
   },
   computed: {
     //utility per calcoli
@@ -166,6 +134,11 @@ export default {
         })
       );
     },
+    heatArr() {
+      return this.markers.map ((el) => {
+        return {lat: el.latlng.lat,lng: el.latlng.lng,int: el.intensita}
+      })
+    }
   },
   created() {
     // forma array per marker
