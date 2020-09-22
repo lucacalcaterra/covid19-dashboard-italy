@@ -42,11 +42,12 @@
               v-for="(marker,index) in markers"
               :key="index"
               :lat-lng="marker.latlng"
-              :radius="2"
+              :radius="1"
             >
-              <l-tooltip :options="{ permanent: false, interactive: false }">
+              <l-tooltip :options="{ permanent: false, interactive: false}">
                 <div @click="innerClick">
-                  {{ marker.denominazione_provincia }}
+                  <div><h2>{{ marker.denominazione_provincia }}</h2></div>
+                  <div><h3>tot: {{ marker.totale_casi }} </h3></div>
                   <p v-show="showParagraph"></p>
                 </div>
               </l-tooltip>
@@ -96,7 +97,7 @@ export default {
       url:
         "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png",
       attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
       withPopup: latLng(47.41322, -1.219482),
       withTooltip: latLng(47.41422, -1.250482),
       currentZoom: 6,
@@ -149,10 +150,10 @@ export default {
       });
       //console.log(d)
     });
-    // aggiunge intensità marker
-    this.markers.forEach((d) => {
-      d.intensita = (30 * d.totale_casi) / this.maxValContagi;
-    });
+    // DEPR-aggiunge intensità marker
+    // this.markers.forEach((d) => {
+    //   d.intensita = (30 * d.totale_casi) / this.maxValContagi;
+    // });
   },
 };
 </script>
