@@ -26,7 +26,7 @@
             @update:zoom="zoomUpdate"
           >
             <l-tile-layer :url="url" :attribution="attribution" />
-<!--             <l-marker :lat-lng="withPopup">
+            <!--             <l-marker :lat-lng="withPopup">
               <l-popup>
                 <div @click="innerClick">
                   I am a popup
@@ -37,13 +37,12 @@
                   </p>
                 </div>
               </l-popup>
-            </l-marker> -->
-            <l-circle-marker              
+            </l-marker>-->
+            <l-circle-marker
               v-for="(marker,index) in markers"
               :key="index"
               :lat-lng="marker.latlng"
               :radius="2"
-              :color='LightenDarkenColor("#F06D06",marker.intensita)'
             >
               <l-tooltip :options="{ permanent: false, interactive: false }">
                 <div @click="innerClick">
@@ -52,8 +51,14 @@
                 </div>
               </l-tooltip>
             </l-circle-marker>
-            <Vue2LeafletHeatmap :lat-lng="heatArr" :max="maxValContagi" :radius="11" :min-opacity="0.85" :max-zoom="12" :blur="12"></Vue2LeafletHeatmap>
-
+            <Vue2LeafletHeatmap
+              :lat-lng="heatArr"
+              :max="maxValContagi"
+              :radius="11"
+              :min-opacity="0.80"
+              :max-zoom="12"
+              :blur="10"
+            ></Vue2LeafletHeatmap>
           </l-map>
         </v-card>
       </v-tab-item>
@@ -63,14 +68,8 @@
 
 <script>
 import { latLng } from "leaflet";
-import {
-  LMap,
-  LTileLayer,
-  LCircleMarker,
-  LTooltip,
-} from "vue2-leaflet";
-import Vue2LeafletHeatmap from 'vue2-leaflet-heatmap/Vue2LeafletHeatmap'
-
+import { LMap, LTileLayer, LCircleMarker, LTooltip } from "vue2-leaflet";
+import Vue2LeafletHeatmap from "vue2-leaflet-heatmap/Vue2LeafletHeatmap";
 
 export default {
   name: "MappaItalia",
@@ -79,7 +78,7 @@ export default {
     LTileLayer,
     LCircleMarker,
     LTooltip,
-    Vue2LeafletHeatmap
+    Vue2LeafletHeatmap,
   },
   props: {
     datiProv: {
@@ -122,7 +121,7 @@ export default {
     },
     innerClick() {
       alert("Click!");
-    },        
+    },
   },
   computed: {
     //utility per calcoli
@@ -135,10 +134,10 @@ export default {
       );
     },
     heatArr() {
-      return this.markers.map ((el) => {
-        return {lat: el.latlng.lat,lng: el.latlng.lng,int: el.intensita}
-      })
-    }
+      return this.markers.map((el) => {
+        return { lat: el.latlng.lat, lng: el.latlng.lng, int: el.intensita };
+      });
+    },
   },
   created() {
     // forma array per marker
@@ -152,11 +151,8 @@ export default {
     });
     // aggiunge intensità marker
     this.markers.forEach((d) => {
-      d.intensita= ((30*d.totale_casi)/this.maxValContagi);      
+      d.intensita = (30 * d.totale_casi) / this.maxValContagi;
     });
-            
-
-    
   },
 };
 </script>
