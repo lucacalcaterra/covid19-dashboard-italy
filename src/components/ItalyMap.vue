@@ -2,13 +2,14 @@
   <v-layout column>
     <v-card class="mt-2">
       <v-toolbar dense elevation="2">
-        <v-btn-toggle v-model="modalita" dense>
+        <v-btn-toggle @change="updateMarkers" v-model="modalita" dense>
           <v-btn>Regioni</v-btn>
           <v-btn>Province</v-btn>
         </v-btn-toggle>
       </v-toolbar>
-      <v-card height="465px" class="mt-3">
+      <v-card height="465px" class="mt-2">
         <l-map
+          ref="mappa"
           :zoom="zoom"
           :center="center"
           :options="mapOptions"
@@ -17,28 +18,19 @@
           @update:zoom="zoomUpdate"
         >
           <l-tile-layer :url="url" :attribution="attribution" />
-          <!--             <l-marker :lat-lng="withPopup">
-              <l-popup>
-                <div @click="innerClick">
-                  I am a popup
-                  <p v-show="showParagraph">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                    sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-                    Donec finibus semper metus id malesuada.
-                  </p>
-                </div>
-              </l-popup>
-          </l-marker>-->
           <l-circle-marker
+            color="#1976d2"
+            fill-color="#35A7DB"
+            :fill-opacity="0.3"
             v-for="(marker,index) in markers"
             :key="index"
             :lat-lng="marker.latlng"
-            :radius="1"
+            :radius="heatArr[index].int"
           >
             <l-tooltip :options="{ permanent: false, interactive: false}">
               <div @click="innerClick">
                 <div>
-                  <h2>{{ marker.denominazione_provincia }}</h2>
+                  <h2>{{ marker.denominazione }}</h2>
                 </div>
                 <div>
                   <h3>tot: {{ marker.totale_casi }}</h3>
@@ -47,14 +39,6 @@
               </div>
             </l-tooltip>
           </l-circle-marker>
-          <Vue2LeafletHeatmap
-            :lat-lng="heatArr"
-            :max="maxValContagi"
-            :radius="11"
-            :min-opacity="0.80"
-            :max-zoom="12"
-            :blur="10"
-          ></Vue2LeafletHeatmap>
         </l-map>
       </v-card>
     </v-card>
@@ -64,7 +48,6 @@
 <script>
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LCircleMarker, LTooltip } from "vue2-leaflet";
-import Vue2LeafletHeatmap from "vue2-leaflet-heatmap/Vue2LeafletHeatmap";
 
 export default {
   name: "MappaItalia",
@@ -73,10 +56,12 @@ export default {
     LTileLayer,
     LCircleMarker,
     LTooltip,
-    Vue2LeafletHeatmap,
   },
   props: {
-    datiProv: {
+    jsonRegioniLatest: {
+      type: Array,
+    },
+    jsonProvinceLatest: {
       type: Array,
     },
   },
@@ -84,7 +69,7 @@ export default {
     return {
       //tabs
       tab: 1,
-      modalita: undefined,
+      modalita: 1,
       //map
       zoom: 5.5,
       center: latLng(42.146902, 12.502441),
@@ -117,6 +102,35 @@ export default {
     innerClick() {
       alert("Click!");
     },
+    updateMarkers: function (mod) {
+      this.markers.length = 0;
+      switch (mod) {
+        case 0:
+          this.jsonRegioniLatest.forEach((d) => {
+            this.markers.push({
+              latlng: latLng(d.lat, d.long),
+              denominazione: d.denominazione_regione,
+              totale_casi: d.totale_casi,
+            });
+            //console.log(d)
+          });
+          this.componentKey += 1;
+
+          break;
+        case 1: {
+          this.jsonProvinceLatest.forEach((d) => {
+            this.markers.push({
+              latlng: latLng(d.lat, d.long),
+              denominazione: d.denominazione_provincia,
+              totale_casi: d.totale_casi,
+            });
+            //console.log(d)
+          });
+          this.componentKey += 1;
+          break;
+        }
+      }
+    },
   },
   computed: {
     //utility per calcoli
@@ -128,26 +142,25 @@ export default {
         })
       );
     },
+    // heat Array, uso solo la property intensita per il raggio dei markers
     heatArr() {
       return this.markers.map((el) => {
-        return { lat: el.latlng.lat, lng: el.latlng.lng, int: el.intensita };
+        return {
+          lat: el.latlng.lat,
+          lng: el.latlng.lng,
+          int: ((25 - 2) * (el.totale_casi - 0)) / (this.maxValContagi - 0) + 2, //(30 * el.totale_casi) / this.maxValContagi,
+        };
       });
     },
   },
-  created() {
-    // forma array per marker
-    this.datiProv.forEach((d) => {
-      this.markers.push({
-        latlng: latLng(d.lat, d.long),
-        denominazione_provincia: d.denominazione_provincia,
-        totale_casi: d.totale_casi,
-      });
-      //console.log(d)
-    });
-    // DEPR-aggiunge intensità marker
-    // this.markers.forEach((d) => {
-    //   d.intensita = (30 * d.totale_casi) / this.maxValContagi;
-    // });
+
+  created() {},
+  mounted() {
+    /* this.$nextTick(() => {
+      // The whole view is rendered, so I can safely access or query
+      // the DOM. ¯\_(ツ)_/¯
+      this.modalita = 0;
+    }); */
   },
 };
 </script>

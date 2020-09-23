@@ -14,20 +14,24 @@
         <v-row justify-center>
           <v-col class="text-center" md="4" sm="12">
             <v-card height="550px" width="auto" class="mx-auto pa-2" :elevation="6" :shaped="false">
-              <italy-map v-if="!isLoading" :datiProv="jsonProvinceLatest"></italy-map>
+              <italy-map
+                v-if="!isLoading"
+                :jsonRegioniLatest="jsonRegioniLatest"
+                :jsonProvinceLatest="jsonProvinceLatest"
+              ></italy-map>
             </v-card>
           </v-col>
           <v-col md="8" sm="12">
             <v-card height="550px" class="mx-auto pa-2" :elevation="6" :shaped="false">
               <v-row class="mx-auto align-center">
-                <v-toolbar>
+                <v-toolbar flat>
                   <v-autocomplete
                     hide-details
                     v-model="selProv"
                     :items="province"
                     item-key="key"
                     item-value="denominazione_provincia"
-                    v-on:change="updDatiProvincia()"
+                    v-on:change="upddatiTrendProvSel()"
                     label="Provincia"
                   ></v-autocomplete>
                   <v-spacer></v-spacer>
@@ -44,7 +48,7 @@
 
               <v-card outlined class="mt-2">
                 <p class="font-weight-black pa-2 pt-5">Provincia</p>
-                <chart-province ref="chartprovince" :chartData="datiProv"></chart-province>
+                <chart-province ref="chartprovince" :chartData="datiTrendProvSel"></chart-province>
               </v-card>
             </v-card>
           </v-col>
@@ -88,7 +92,9 @@ export default {
     periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi", "6 Mesi"],
     jsonProvince: [],
     jsonProvinceLatest: [],
-    datiProv: [],
+    jsonRegioni: [],
+    jsonRegioniLatest: [],
+    datiTrendProvSel: [],
 
     arrPositivi: [],
     positiveChartColors: {
@@ -108,7 +114,7 @@ export default {
 
     await this.getDatiNaz();
     this.getProvince();
-    await this.updDatiProvincia();
+    await this.upddatiTrendProvSel();
   },
   mounted() {
     //this.isLoading=true;
@@ -117,6 +123,12 @@ export default {
   methods: {
     getDatiNaz: async function () {
       this.isLoading = true;
+
+      let { data: tmpJsonRegioniLatest } = await axios.get(
+        "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni-latest.json"
+      );
+      this.jsonRegioniLatest = tmpJsonRegioniLatest;
+
       let { data: tmpJsonProvince } = await axios.get(
         "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
       );
@@ -151,10 +163,10 @@ export default {
       ].sort();
       this.province = res;
     },
-    updDatiProvincia: function () {
+    upddatiTrendProvSel: function () {
       this.isLoading = true;
 
-      this.datiProv = [];
+      this.datiTrendProvSel = [];
       const res = this.jsonProvince.filter((elem) => {
         return elem.denominazione_provincia === this.selProv;
       });
@@ -165,13 +177,13 @@ export default {
           denominazione_provincia,
           //totpositivi,
         } = d;
-        this.datiProv.push({
+        this.datiTrendProvSel.push({
           date,
           total: totale_casi,
           prov: denominazione_provincia,
         });
       });
-      //console.log (this.datiProv)
+      //console.log (this.datiTrendProvSel)
       this.isLoading = false;
       this.selPeriodo = 0;
       this.$refs.chartprovince.$refs.chart.resetSeries(true, true);
