@@ -13,24 +13,15 @@
         <loading :active.sync="isLoading"></loading>
         <v-row justify-center>
           <v-col class="text-center" md="4" sm="12">
-
-            <v-card
-              height="550px"
-              width="auto"
-              class="mx-auto pa-2"
-              :elevation="16"
-              :shaped="false"
-            >
-              
+            <v-card height="550px" width="auto" class="mx-auto pa-2" :elevation="6" :shaped="false">
               <italy-map v-if="!isLoading" :datiProv="jsonProvinceLatest"></italy-map>
             </v-card>
           </v-col>
           <v-col md="8" sm="12">
-            <v-card height="550px" class="mx-auto pa-5" :elevation="16" :shaped="false">
+            <v-card height="550px" class="mx-auto pa-2" :elevation="6" :shaped="false">
               <v-row class="mx-auto align-center">
-                <v-col cols="6">
+                <v-toolbar>
                   <v-autocomplete
-                    solo
                     hide-details
                     v-model="selProv"
                     :items="province"
@@ -39,8 +30,7 @@
                     v-on:change="updDatiProvincia()"
                     label="Provincia"
                   ></v-autocomplete>
-                </v-col>
-                <v-col cols="6">
+                  <v-spacer></v-spacer>
                   <v-chip-group
                     v-on:change="updPeriodo()"
                     v-model="selPeriodo"
@@ -49,7 +39,7 @@
                   >
                     <v-chip v-for="periodo in periodi" :key="periodo">{{ periodo }}</v-chip>
                   </v-chip-group>
-                </v-col>
+                </v-toolbar>
               </v-row>
 
               <v-card outlined class="mt-2">
