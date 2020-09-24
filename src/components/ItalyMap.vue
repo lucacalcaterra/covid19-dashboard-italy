@@ -22,12 +22,12 @@
             color="#1976d2"
             fill-color="#35A7DB"
             :fill-opacity="0.3"
-            v-for="(marker,index) in markers"
+            v-for="(marker, index) in markers"
             :key="index"
             :lat-lng="marker.latlng"
             :radius="heatArr[index].int"
           >
-            <l-tooltip :options="{ permanent: false, interactive: false}">
+            <l-tooltip :options="{ permanent: false, interactive: false }">
               <div @click="innerClick">
                 <div>
                   <h2>{{ marker.denominazione }}</h2>
@@ -102,9 +102,9 @@ export default {
     innerClick() {
       alert("Click!");
     },
-    updateMarkers: function (mod) {
+    updateMarkers: function () {
       this.markers.length = 0;
-      switch (mod) {
+      switch (this.modalita) {
         case 0:
           this.jsonRegioniLatest.forEach((d) => {
             this.markers.push({
@@ -161,6 +161,7 @@ export default {
       // the DOM. ¯\_(ツ)_/¯
       this.modalita = 0;
     }); */
+    this.updateMarkers();
   },
 };
 </script>
