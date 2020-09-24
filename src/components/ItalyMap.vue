@@ -3,7 +3,7 @@
     <v-card class="mt-2">
       <v-toolbar dense elevation="2">
         <v-chip-group @change="updateMarkers" v-model="selModalita" dense>
-          <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
+          <v-chip v-for="modo in selModalita" :key="modo">{{ modo }}</v-chip>
         </v-chip-group>
       </v-toolbar>
       <v-card height="465px" class="mt-2">
@@ -69,7 +69,7 @@ export default {
       //tabs
       tab: 1,
       modalita: ["Regioni", "Province"],
-      selModalita: 0,
+      selModalita: { 0: "Regioni", 1: "Province" },
       //map
       zoom: 5.5,
       center: latLng(42.146902, 12.502441),
