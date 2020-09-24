@@ -148,7 +148,7 @@ export default {
         return {
           lat: el.latlng.lat,
           lng: el.latlng.lng,
-          int: ((25 - 2) * (el.totale_casi - 0)) / (this.maxValContagi - 0) + 2, //(30 * el.totale_casi) / this.maxValContagi,
+          int: ((25 - 3) * (el.totale_casi - 0)) / (this.maxValContagi - 0) + 3, //(30 * el.totale_casi) / this.maxValContagi,
         };
       });
     },
