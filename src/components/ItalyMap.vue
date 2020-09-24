@@ -1,18 +1,14 @@
 <template>
   <v-layout column>
-    <v-card class="mt-2">
-      <v-toolbar dense elevation="2">
-        <v-chip-group @change="updateMarkers" v-model="selModalita" dense>
-          <v-chip v-for="modo in selModalita" :key="modo">{{ modo }}</v-chip>
+        <v-chip-group @change="updateMarkers" v-model="selModalita" mandatory active-class="primary--text">
+          <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
         </v-chip-group>
-      </v-toolbar>
-      <v-card height="465px" class="mt-2">
         <l-map
+          style="height: 486px ; border: 1px solid lightgray"
           ref="mappa"
           :zoom="zoom"
           :center="center"
           :options="mapOptions"
-          style
           @update:center="centerUpdate"
           @update:zoom="zoomUpdate"
         >
@@ -39,8 +35,6 @@
             </l-tooltip>
           </l-circle-marker>
         </l-map>
-      </v-card>
-    </v-card>
   </v-layout>
 </template>
 
@@ -68,8 +62,8 @@ export default {
     return {
       //tabs
       tab: 1,
-      modalita: ["Regioni", "Province"],
-      selModalita: { 0: "Regioni", 1: "Province" },
+      modalita: ['Regioni', 'Province'],
+      selModalita: 1,
       //map
       zoom: 5.5,
       center: latLng(42.146902, 12.502441),

@@ -13,7 +13,7 @@
         <loading :active.sync="isLoading"></loading>
         <v-row justify-center>
           <v-col class="text-center" md="4" sm="12">
-            <v-card height="550px" width="auto" class="mx-auto pa-2" :elevation="6" :shaped="false">
+            <v-card width="auto" class="mx-auto pa-2" :elevation="6" :shaped="false">
               <italy-map
                 v-if="!isLoading"
                 :jsonRegioniLatest="jsonRegioniLatest"
