@@ -2,10 +2,9 @@
   <v-layout column>
     <v-card class="mt-2">
       <v-toolbar dense elevation="2">
-        <v-btn-toggle @change="updateMarkers" v-model="modalita" dense>
-          <v-btn>Regioni</v-btn>
-          <v-btn>Province</v-btn>
-        </v-btn-toggle>
+        <v-chip-group @change="updateMarkers" v-model="selModalita" dense>
+          <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
+        </v-chip-group>
       </v-toolbar>
       <v-card height="465px" class="mt-2">
         <l-map
@@ -69,7 +68,8 @@ export default {
     return {
       //tabs
       tab: 1,
-      modalita: 1,
+      modalita: ["Regioni", "Province"],
+      selModalita: 0,
       //map
       zoom: 5.5,
       center: latLng(42.146902, 12.502441),
@@ -104,7 +104,7 @@ export default {
     },
     updateMarkers: function () {
       this.markers.length = 0;
-      switch (this.modalita) {
+      switch (this.selModalita) {
         case 0:
           this.jsonRegioniLatest.forEach((d) => {
             this.markers.push({
