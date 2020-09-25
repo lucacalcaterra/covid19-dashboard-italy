@@ -11,8 +11,32 @@
     <v-main>
       <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
-        <v-row justify-center>
-          <v-col class="text-center" md="4" sm="12">
+        <v-row justify="right">
+          <v-spacer></v-spacer>
+          <v-col md="4" sm="12">
+            <v-row>
+              <v-card
+                height=""
+                width="auto"
+                class="mx-auto pa-2"
+                :elevation="6"
+                :shaped="false"
+              >
+                row 1
+              </v-card>
+            </v-row>
+            <v-row
+              ><v-card
+                width="auto"
+                class="mx-auto pa-2"
+                :elevation="6"
+                :shaped="false"
+              >
+                row 2
+              </v-card></v-row
+            >
+          </v-col>
+          <v-col class="" md="4" sm="12">
             <v-card
               min-height="100%"
               width="auto"
@@ -27,7 +51,7 @@
               ></italy-map>
             </v-card>
           </v-col>
-          <v-col md="8" sm="12">
+          <v-col md="4" sm="12">
             <v-card
               height="550px"
               class="mx-auto pa-2"
@@ -69,6 +93,7 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-row>ciao</v-row>
       </v-container>
     </v-main>
   </v-app>

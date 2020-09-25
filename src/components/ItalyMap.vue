@@ -79,7 +79,7 @@ export default {
       withPopup: latLng(47.41322, -1.219482),
       withTooltip: latLng(47.41422, -1.250482),
       currentZoom: 6,
-      currentCenter: latLng(41.539645, 12.449227),
+      //currentCenter: latLng(41.539645, 12.449227),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
@@ -106,6 +106,7 @@ export default {
       alert("Click!");
     },
     updateMarkers: function () {
+      this.onResize();
       this.markers.length = 0;
       switch (this.selModalita) {
         case 0:
