@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <v-app-bar app color="primary" dark style="z-index:1001">
+    <v-app-bar app color="primary" dark style="z-index: 1001">
       <div class="d-flex align-center">
         <v-toolbar-title>Monitoraggio Covid 19</v-toolbar-title>
       </div>
@@ -13,16 +13,25 @@
         <loading :active.sync="isLoading"></loading>
         <v-row justify-center>
           <v-col class="text-center" md="4" sm="12">
-            <v-card width="auto" class="mx-auto pa-2" :elevation="6" :shaped="false">
+            <v-card
+              width="auto"
+              class="mx-auto pa-2"
+              :elevation="6"
+              :shaped="false"
+            >
               <italy-map
-                v-if="!isLoading"
                 :jsonRegioniLatest="jsonRegioniLatest"
                 :jsonProvinceLatest="jsonProvinceLatest"
               ></italy-map>
             </v-card>
           </v-col>
           <v-col md="8" sm="12">
-            <v-card height="550px" class="mx-auto pa-2" :elevation="6" :shaped="false">
+            <v-card
+              height="550px"
+              class="mx-auto pa-2"
+              :elevation="6"
+              :shaped="false"
+            >
               <v-row class="mx-auto align-center">
                 <v-toolbar flat>
                   <v-autocomplete
@@ -41,14 +50,19 @@
                     active-class="primary--text"
                     mandatory
                   >
-                    <v-chip v-for="periodo in periodi" :key="periodo">{{ periodo }}</v-chip>
+                    <v-chip v-for="periodo in periodi" :key="periodo">{{
+                      periodo
+                    }}</v-chip>
                   </v-chip-group>
                 </v-toolbar>
               </v-row>
 
               <v-card outlined class="mt-2">
                 <p class="font-weight-black pa-2 pt-5">Provincia</p>
-                <chart-province ref="chartprovince" :chartData="datiTrendProvSel"></chart-province>
+                <chart-province
+                  ref="chartprovince"
+                  :chartData="datiTrendProvSel"
+                ></chart-province>
               </v-card>
             </v-card>
           </v-col>
