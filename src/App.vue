@@ -14,12 +14,14 @@
         <v-row justify-center>
           <v-col class="text-center" md="4" sm="12">
             <v-card
+              min-height="100%"
               width="auto"
               class="mx-auto pa-2"
               :elevation="6"
               :shaped="false"
             >
               <italy-map
+                v-if="!isLoading"
                 :jsonRegioniLatest="jsonRegioniLatest"
                 :jsonProvinceLatest="jsonProvinceLatest"
               ></italy-map>

@@ -1,40 +1,45 @@
 <template>
-  <v-layout column>
-        <v-chip-group @change="updateMarkers" v-model="selModalita" mandatory active-class="primary--text">
-          <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
-        </v-chip-group>
-        <l-map
-          style="height: 486px ; border: 1px solid lightgray"
-          ref="mappa"
-          :zoom="zoom"
-          :center="center"
-          :options="mapOptions"
-          @update:center="centerUpdate"
-          @update:zoom="zoomUpdate"
-        >
-          <l-tile-layer :url="url" :attribution="attribution" />
-          <l-circle-marker
-            color="#1976d2"
-            fill-color="#35A7DB"
-            :fill-opacity="0.3"
-            v-for="(marker, index) in markers"
-            :key="index"
-            :lat-lng="marker.latlng"
-            :radius="heatArr[index].int"
-          >
-            <l-tooltip :options="{ permanent: false, interactive: false }">
-              <div @click="innerClick">
-                <div>
-                  <h2>{{ marker.denominazione }}</h2>
-                </div>
-                <div>
-                  <h3>tot: {{ marker.totale_casi }}</h3>
-                </div>
-                <p v-show="showParagraph"></p>
-              </div>
-            </l-tooltip>
-          </l-circle-marker>
-        </l-map>
+  <v-layout column v-resize="onResize">
+    <v-chip-group
+      @change="updateMarkers"
+      v-model="selModalita"
+      mandatory
+      active-class="primary--text"
+    >
+      <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
+    </v-chip-group>
+    <l-map
+      style="height: 486px !important ; border: 1px solid lightgray"
+      ref="mappa"
+      :zoom="zoom"
+      :center="center"
+      :options="mapOptions"
+      @update:center="centerUpdate"
+      @update:zoom="zoomUpdate"
+    >
+      <l-tile-layer :url="url" :attribution="attribution" />
+      <l-circle-marker
+        color="#1976d2"
+        fill-color="#35A7DB"
+        :fill-opacity="0.3"
+        v-for="(marker, index) in markers"
+        :key="index"
+        :lat-lng="marker.latlng"
+        :radius="heatArr[index].int"
+      >
+        <l-tooltip :options="{ permanent: false, interactive: false }">
+          <div @click="innerClick">
+            <div>
+              <h2>{{ marker.denominazione }}</h2>
+            </div>
+            <div>
+              <h3>tot: {{ marker.totale_casi }}</h3>
+            </div>
+            <p v-show="showParagraph"></p>
+          </div>
+        </l-tooltip>
+      </l-circle-marker>
+    </l-map>
   </v-layout>
 </template>
 
@@ -62,7 +67,7 @@ export default {
     return {
       //tabs
       tab: 1,
-      modalita: ['Regioni', 'Province'],
+      modalita: ["Regioni", "Province"],
       selModalita: 1,
       //map
       zoom: 5.5,
@@ -84,6 +89,10 @@ export default {
     };
   },
   methods: {
+    onResize() {
+      //this.centerUpdate(latLng(41.539645, 12.449227));
+      this.$refs.mappa.mapObject.setView(this.center, this.zoom);
+    },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
     },
