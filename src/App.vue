@@ -11,35 +11,29 @@
     <v-main>
       <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
-        <v-row justify="right">
-          <v-spacer></v-spacer>
-          <v-col md="4" sm="12">
-            <v-row>
-              <v-card
-                height=""
-                width="auto"
-                class="mx-auto pa-2"
-                :elevation="6"
-                :shaped="false"
-              >
-                row 1
-              </v-card>
-            </v-row>
-            <v-row
-              ><v-card
-                width="auto"
-                class="mx-auto pa-2"
-                :elevation="6"
-                :shaped="false"
-              >
-                row 2
-              </v-card></v-row
-            >
-          </v-col>
-          <v-col class="" md="4" sm="12">
+        <v-row>
+          <v-col cols="12" md="4" sm="12">
             <v-card
-              min-height="100%"
-              width="auto"
+              width="100%"
+              class="mx-auto pa-2"
+              :elevation="6"
+              :shaped="false"
+            >
+              row 1
+            </v-card>
+            <v-card
+              width="100%"
+              class="mx-auto pa-2"
+              :elevation="6"
+              :shaped="false"
+            >
+              row 2
+            </v-card>
+          </v-col>
+          <v-col md="4" sm="12">
+            <v-card
+              height="100%"
+              width="100%"
               class="mx-auto pa-2"
               :elevation="6"
               :shaped="false"
@@ -48,7 +42,14 @@
                 v-if="!isLoading"
                 :jsonRegioniLatest="jsonRegioniLatest"
                 :jsonProvinceLatest="jsonProvinceLatest"
+                :isLoading="isLoading"
               ></italy-map>
+              <v-skeleton-loader
+                height="534px !important"
+                v-else
+                class=""
+                type="card"
+              ></v-skeleton-loader>
             </v-card>
           </v-col>
           <v-col md="4" sm="12">
@@ -93,7 +94,6 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-row>ciao</v-row>
       </v-container>
     </v-main>
   </v-app>

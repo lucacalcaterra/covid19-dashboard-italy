@@ -62,6 +62,9 @@ export default {
     jsonProvinceLatest: {
       type: Array,
     },
+    isLoading: {
+      type: Boolean,
+    },
   },
   data() {
     return {
