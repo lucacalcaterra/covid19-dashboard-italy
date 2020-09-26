@@ -9,6 +9,7 @@
       <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
     </v-chip-group>
     <l-map
+      @ready="mapReady()"
       style="height: 486px !important ; border: 1px solid lightgray"
       ref="mappa"
       :zoom="zoom"
@@ -138,6 +139,10 @@ export default {
         }
       }
     },
+    mapReady() {
+      //console.log("mappa pronta");
+      this.updateMarkers();
+    },
   },
   computed: {
     //utility per calcoli
@@ -168,7 +173,7 @@ export default {
       // the DOM. ¯\_(ツ)_/¯
       this.modalita = 0;
     }); */
-    this.updateMarkers();
+    //this.updateMarkers();
   },
 };
 </script>

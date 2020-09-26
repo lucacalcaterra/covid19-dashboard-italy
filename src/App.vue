@@ -12,24 +12,6 @@
       <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
         <v-row>
-          <v-col cols="12" md="4" sm="12">
-            <v-card
-              width="100%"
-              class="mx-auto pa-2"
-              :elevation="6"
-              :shaped="false"
-            >
-              row 1
-            </v-card>
-            <v-card
-              width="100%"
-              class="mx-auto pa-2"
-              :elevation="6"
-              :shaped="false"
-            >
-              row 2
-            </v-card>
-          </v-col>
           <v-col md="4" sm="12">
             <v-card
               height="100%"
@@ -50,6 +32,60 @@
                 class=""
                 type="card"
               ></v-skeleton-loader>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="4">
+            <v-card
+              height="100%"
+              width="100%"
+              class="mx-auto pa-2"
+              :elevation="6"
+              :shaped="false"
+            >
+              <v-row justify="center">
+                <v-col :key="1">
+                  <v-card
+                    class="mx-auto"
+                    color="primary"
+                    :elevation="6"
+                    outlined
+                    tile
+                  >
+                    <v-card-title class="text-left">
+                      <span class="title font-weight-light white--text"
+                        >Prova
+                      </span></v-card-title
+                    >
+                    <v-card-text class="headline font-weight-bold"
+                      >Test</v-card-text
+                    >
+                  </v-card>
+                </v-col>
+                <v-col :key="2">
+                  <v-card class="mx-auto" :elevation="6" outlined tile>
+                    Column
+                  </v-card>
+                </v-col>
+                <v-col :key="3">
+                  <v-card class="mx-auto" :elevation="6" outlined tile>
+                    Column
+                  </v-card>
+                </v-col>
+                <v-col :key="4">
+                  <v-card class="mx-auto" :elevation="6" outlined tile>
+                    Column
+                  </v-card>
+                </v-col>
+              </v-row>
+
+              <v-card
+                width="100%"
+                class="mx-auto pa-2"
+                :elevation="6"
+                :shaped="false"
+              >
+                row 2
+              </v-card>
             </v-card>
           </v-col>
           <v-col md="4" sm="12">
@@ -77,7 +113,7 @@
                     active-class="primary--text"
                     mandatory
                   >
-                    <v-chip v-for="periodo in periodi" :key="periodo">{{
+                    <v-chip small v-for="periodo in periodi" :key="periodo">{{
                       periodo
                     }}</v-chip>
                   </v-chip-group>
