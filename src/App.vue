@@ -12,7 +12,7 @@
       <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
         <v-row>
-          <v-col md="4" sm="12">
+          <v-col md="3" sm="12">
             <v-card
               height="100%"
               width="100%"
@@ -34,12 +34,12 @@
               ></v-skeleton-loader>
             </v-card>
           </v-col>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="6">
             <dati-nazionali
               :jsonTrendNazione="jsonTrendNazione"
             ></dati-nazionali>
           </v-col>
-          <v-col md="4" sm="12">
+          <v-col md="3" sm="12">
             <v-card
               height="550px"
               class="mx-auto pa-2"
@@ -47,28 +47,25 @@
               :shaped="false"
             >
               <v-row class="mx-auto align-center">
-                <v-toolbar flat>
-                  <v-autocomplete
-                    hide-details
-                    v-model="selProv"
-                    :items="province"
-                    item-key="key"
-                    item-value="denominazione_provincia"
-                    v-on:change="upddatiTrendProvSel()"
-                    label="Provincia"
-                  ></v-autocomplete>
-                  <v-spacer></v-spacer>
-                  <v-chip-group
-                    v-on:change="updPeriodo()"
-                    v-model="selPeriodo"
-                    active-class="primary--text"
-                    mandatory
-                  >
-                    <v-chip small v-for="periodo in periodi" :key="periodo">{{
-                      periodo
-                    }}</v-chip>
-                  </v-chip-group>
-                </v-toolbar>
+                <v-autocomplete
+                  hide-details
+                  v-model="selProv"
+                  :items="province"
+                  item-key="key"
+                  item-value="denominazione_provincia"
+                  v-on:change="upddatiTrendProvSel()"
+                  label="Provincia"
+                ></v-autocomplete>
+                <v-chip-group
+                  v-on:change="updPeriodo()"
+                  v-model="selPeriodo"
+                  active-class="primary--text"
+                  mandatory
+                >
+                  <v-chip small v-for="periodo in periodi" :key="periodo">{{
+                    periodo
+                  }}</v-chip>
+                </v-chip-group>
               </v-row>
 
               <v-card outlined class="mt-2">

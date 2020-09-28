@@ -7,7 +7,7 @@
     :shaped="false"
   >
     <v-row v-if="jsonNazioneOggi">
-      <v-col>
+      <v-col cols="3">
         <v-card
           height="100%"
           class="d-flex flex-column mx-auto"
@@ -18,14 +18,14 @@
         >
           <v-card-title class="text-left">
             <span class="subtitle-2 font-weight-light white--text"
-              >Attuali Positivi
+              >Attuali <br />Positivi
             </span></v-card-title
           >
           <v-card-text
             class="headline text-center font-weight-black white--text"
             >{{ jsonNazioneOggi.totale_positivi }}</v-card-text
           >
-          <v-divider></v-divider>
+          <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
             >Variazione</v-card-subtitle
@@ -36,7 +36,7 @@
           >
         </v-card>
       </v-col>
-      <v-col>
+      <v-col cols="3">
         <v-card
           height="100%"
           class="d-flex flex-column mx-auto"
@@ -47,13 +47,14 @@
         >
           <v-card-title class="text-left">
             <span class="subtitle-2 font-weight-light white--text"
-              >Dimessi/Guariti
+              >Dimessi/ <br />Guariti
             </span></v-card-title
           >
           <v-card-text
             class="headline text-center font-weight-black white--text"
             >{{ jsonNazioneOggi.dimessi_guariti }}</v-card-text
           >
+          <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
             >Variazione</v-card-subtitle
@@ -67,7 +68,7 @@
           >
         </v-card>
       </v-col>
-      <v-col>
+      <v-col cols="3">
         <v-card
           height="100%"
           class="d-flex flex-column mx-auto"
@@ -78,13 +79,15 @@
         >
           <v-card-title class="text-left">
             <span class="subtitle-2 font-weight-light white--text"
-              >Deceduti<br /></span
+              >Deceduti<br />
+              <br /></span
           ></v-card-title>
           <v-card-text
             class="headline text-center font-weight-bold white--text"
           >
             {{ jsonNazioneOggi.deceduti }}
           </v-card-text>
+          <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
             >Variazione</v-card-subtitle
@@ -97,7 +100,7 @@
           >
         </v-card>
       </v-col>
-      <v-col>
+      <v-col cols="3">
         <v-card
           height="100%"
           class="d-flex flex-column mx-auto"
@@ -108,7 +111,8 @@
         >
           <v-card-title class="text-left">
             <span class="subtitle-2 font-weight-light white--text"
-              >Totale Casi
+              >Totale <br />
+              Casi
             </span></v-card-title
           >
           <v-card-text
@@ -116,7 +120,7 @@
           >
             {{ jsonNazioneOggi.totale_casi }}</v-card-text
           >
-          <v-divider></v-divider>
+          <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
             >Variazione</v-card-subtitle

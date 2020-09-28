@@ -74,7 +74,7 @@ export default {
       modalita: ["Regioni", "Province"],
       selModalita: 1,
       //map
-      zoom: 5.5,
+      zoom: 5,
       center: latLng(42.146902, 12.502441),
       url:
         "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png",
@@ -82,7 +82,7 @@ export default {
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
       withPopup: latLng(47.41322, -1.219482),
       withTooltip: latLng(47.41422, -1.250482),
-      currentZoom: 6,
+      currentZoom: 5,
       //currentCenter: latLng(41.539645, 12.449227),
       showParagraph: false,
       mapOptions: {
