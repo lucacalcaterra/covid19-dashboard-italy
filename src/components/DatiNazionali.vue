@@ -6,7 +6,7 @@
     :elevation="6"
     :shaped="false"
   >
-    <v-row>
+    <v-row v-if="jsonNazioneOggi">
       <v-col>
         <v-card
           height="100%"
@@ -23,7 +23,7 @@
           >
           <v-card-text
             class="headline text-center font-weight-black white--text"
-            >{{ jsonNazioneLatest.totale_positivi }}</v-card-text
+            >{{ jsonNazioneOggi.totale_positivi }}</v-card-text
           >
           <v-divider></v-divider>
           <v-card-subtitle
@@ -32,7 +32,7 @@
           >
           <v-card-text
             class="headline text-center font-weight-light white--text"
-            >{{ jsonNazioneLatest.variazione_totale_positivi }}</v-card-text
+            >{{ jsonNazioneOggi.variazione_totale_positivi }}</v-card-text
           >
         </v-card>
       </v-col>
@@ -52,7 +52,18 @@
           >
           <v-card-text
             class="headline text-center font-weight-black white--text"
-            >{{ jsonNazioneLatest.dimessi_guariti }}</v-card-text
+            >{{ jsonNazioneOggi.dimessi_guariti }}</v-card-text
+          >
+          <v-card-subtitle
+            class="caption text-center font-weight-light white--text"
+            >Variazione</v-card-subtitle
+          >
+          <v-card-text
+            v-if="jsonNazioneOggi.dimessi_guariti"
+            class="headline text-center font-weight-light white--text"
+            >{{
+              jsonNazioneOggi.dimessi_guariti - jsonNazioneIeri.dimessi_guariti
+            }}</v-card-text
           >
         </v-card>
       </v-col>
@@ -72,8 +83,18 @@
           <v-card-text
             class="headline text-center font-weight-bold white--text"
           >
-            {{ jsonNazioneLatest.deceduti }}
+            {{ jsonNazioneOggi.deceduti }}
           </v-card-text>
+          <v-card-subtitle
+            class="caption text-center font-weight-light white--text"
+            >Variazione</v-card-subtitle
+          >
+          <v-card-text
+            class="headline text-center font-weight-light white--text"
+            >{{
+              jsonNazioneOggi.deceduti - jsonNazioneIeri.deceduti
+            }}</v-card-text
+          >
         </v-card>
       </v-col>
       <v-col>
@@ -93,7 +114,7 @@
           <v-card-text
             class="headline text-center font-weight-black white--text"
           >
-            {{ jsonNazioneLatest.totale_casi }}</v-card-text
+            {{ jsonNazioneOggi.totale_casi }}</v-card-text
           >
           <v-divider></v-divider>
           <v-card-subtitle
@@ -102,7 +123,7 @@
           >
           <v-card-text
             class="headline text-center font-weight-light white--text"
-            >{{ jsonNazioneLatest.nuovi_positivi }}</v-card-text
+            >{{ jsonNazioneOggi.nuovi_positivi }}</v-card-text
           >
         </v-card>
       </v-col>
@@ -118,7 +139,7 @@
 export default {
   components: {},
   props: {
-    jsonNazioneLatest: {
+    jsonTrendNazione: {
       type: Array,
     },
   },
@@ -127,6 +148,13 @@ export default {
   },
   mounted() {},
 
-  computed: {},
+  computed: {
+    jsonNazioneIeri() {
+      return this.jsonTrendNazione[this.jsonTrendNazione.length - 2];
+    },
+    jsonNazioneOggi() {
+      return this.jsonTrendNazione[this.jsonTrendNazione.length - 1];
+    },
+  },
 };
 </script>

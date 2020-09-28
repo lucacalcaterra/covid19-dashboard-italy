@@ -36,7 +36,7 @@
           </v-col>
           <v-col cols="12" md="4">
             <dati-nazionali
-              :jsonNazioneLatest="jsonNazioneLatest"
+              :jsonTrendNazione="jsonTrendNazione"
             ></dati-nazionali>
           </v-col>
           <v-col md="4" sm="12">
@@ -120,7 +120,7 @@ export default {
     selProv: "Macerata",
     selPeriodo: "",
     periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi", "6 Mesi"],
-    jsonNazione: [],
+    jsonTrendNazione: [],
     jsonNazioneLatest: [],
     jsonProvince: [],
     jsonProvinceLatest: [],
@@ -156,15 +156,15 @@ export default {
     getDatiNaz: async function () {
       this.isLoading = true;
 
-      let { data: tmpJsonNazione } = await axios.get(
+      let { data: tmpJsonTrendNazione } = await axios.get(
         "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json"
       );
-      this.jsonNazioneLatest = tmpJsonNazione;
+      this.jsonTrendNazione = tmpJsonTrendNazione;
 
-      let { data: tmpJsonNazioneLatest } = await axios.get(
-        "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale-latest.json"
-      );
-      this.jsonNazioneLatest = tmpJsonNazioneLatest[0];
+      // let { data: tmpJsonNazioneLatest } = await axios.get(
+      //   "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale-latest.json"
+      // );
+      // this.jsonNazioneLatest = tmpJsonNazioneLatest[0];
 
       let { data: tmpJsonRegioniLatest } = await axios.get(
         "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni-latest.json"
