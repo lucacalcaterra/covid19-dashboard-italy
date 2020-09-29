@@ -12,7 +12,14 @@
       <v-container class="background-white" fluid>
         <loading :active.sync="isLoading"></loading>
         <v-row>
-          <v-col md="3" sm="12">
+          <v-col cols="12">
+            <dati-nazionali
+              :jsonTrendNazione="jsonTrendNazione"
+            ></dati-nazionali>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col lg="3" md="12">
             <v-card
               height="100%"
               width="100%"
@@ -34,12 +41,8 @@
               ></v-skeleton-loader>
             </v-card>
           </v-col>
-          <v-col cols="12" md="6">
-            <dati-nazionali
-              :jsonTrendNazione="jsonTrendNazione"
-            ></dati-nazionali>
-          </v-col>
-          <v-col md="3" sm="12">
+          <v-col lg="5" md="12"> </v-col>
+          <v-col lg="4" md="12">
             <v-card
               height="550px"
               class="mx-auto pa-2"

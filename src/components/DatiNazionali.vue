@@ -6,19 +6,12 @@
     :elevation="6"
     :shaped="false"
   >
-    <v-row v-if="jsonNazioneOggi">
-      <v-col cols="3">
-        <v-card
-          height="100%"
-          class="d-flex flex-column mx-auto"
-          color="red"
-          :elevation="6"
-          outlined
-          tile
-        >
+    <v-row v-if="jsonNazioneOggi" class="mx-auto">
+      <v-col lg="3" cols="6">
+        <v-card height="100%" class="" color="red" :elevation="6" outlined tile>
           <v-card-title class="text-left">
-            <span class="subtitle-2 font-weight-light white--text"
-              >Attuali <br />Positivi
+            <span class="headline font-weight-light white--text"
+              >Attuali Positivi
             </span></v-card-title
           >
           <v-card-text
@@ -36,18 +29,18 @@
           >
         </v-card>
       </v-col>
-      <v-col cols="3">
+      <v-col lg="3" cols="6">
         <v-card
           height="100%"
-          class="d-flex flex-column mx-auto"
+          class=""
           color="green"
           :elevation="6"
           outlined
           tile
         >
           <v-card-title class="text-left">
-            <span class="subtitle-2 font-weight-light white--text"
-              >Dimessi/ <br />Guariti
+            <span class="headline font-weight-light white--text"
+              >Dimessi/Guariti
             </span></v-card-title
           >
           <v-card-text
@@ -68,20 +61,20 @@
           >
         </v-card>
       </v-col>
-      <v-col cols="3">
+      <v-col lg="3" cols="6">
         <v-card
           height="100%"
-          class="d-flex flex-column mx-auto"
+          class=""
           color="black"
           :elevation="6"
           outlined
           tile
         >
           <v-card-title class="text-left">
-            <span class="subtitle-2 font-weight-light white--text"
-              >Deceduti<br />
-              <br /></span
-          ></v-card-title>
+            <span class="headline font-weight-light white--text"
+              >Deceduti
+            </span></v-card-title
+          >
           <v-card-text
             class="headline text-center font-weight-bold white--text"
           >
@@ -100,19 +93,18 @@
           >
         </v-card>
       </v-col>
-      <v-col cols="3">
+      <v-col lg="3" cols="6">
         <v-card
           height="100%"
-          class="d-flex flex-column mx-auto"
+          class=""
           color="orange"
           :elevation="6"
           outlined
           tile
         >
           <v-card-title class="text-left">
-            <span class="subtitle-2 font-weight-light white--text"
-              >Totale <br />
-              Casi
+            <span class="headline font-weight-light white--text"
+              >Totale Casi
             </span></v-card-title
           >
           <v-card-text
@@ -132,10 +124,6 @@
         </v-card>
       </v-col>
     </v-row>
-
-    <v-card width="100%" class="mx-auto pa-2" :elevation="6" :shaped="false">
-      row 2
-    </v-card>
   </v-card>
 </template>
 
