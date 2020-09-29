@@ -43,7 +43,14 @@
               ></v-skeleton-loader>
             </v-card>
           </v-col>
-          <v-col lg="5" md="12"> </v-col>
+          <v-col lg="5" md="12">
+            <v-card class="mx-auto pa-2" :elevation="6" :shaped="false">
+              <chart-trend-nazione
+                ref="chartTrendNazione"
+                :chartData="jsonTrendNazione"
+              ></chart-trend-nazione>
+            </v-card>
+          </v-col>
           <v-col lg="4" md="12">
             <v-card
               height="550px"
@@ -100,6 +107,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 
 //import LineChart from "./components/LineChart";
 import DatiNazionali from "./components/DatiNazionali";
+import ChartTrendNazione from "./components/ChartTrendNazione";
 import ItalyMap from "./components/ItalyMap";
 import ChartProvince from "./components/ChartProvince.vue";
 
@@ -107,6 +115,7 @@ export default {
   components: {
     //LineChart,
     DatiNazionali,
+    ChartTrendNazione,
     ItalyMap,
     ChartProvince,
     Loading,

@@ -134,7 +134,7 @@
                   <v-list-item-title class="text-left">
                     {{ formatData(item.data) }}
                   </v-list-item-title>
-                  <span class="h5 text-justify">{{ item.note }}</span>
+                  <span class="body-2 text-justify">{{ item.note }}</span>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
