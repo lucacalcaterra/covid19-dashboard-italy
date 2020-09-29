@@ -15,9 +15,11 @@
           <v-col cols="12">
             <dati-nazionali
               :jsonTrendNazione="jsonTrendNazione"
+              :jsonNote="jsonNote"
             ></dati-nazionali>
           </v-col>
         </v-row>
+        <v-spacer></v-spacer>
         <v-row>
           <v-col lg="3" md="12">
             <v-card
@@ -120,6 +122,7 @@ export default {
     selProv: "Macerata",
     selPeriodo: "",
     periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi", "6 Mesi"],
+    jsonNote: [],
     jsonTrendNazione: [],
     jsonNazioneLatest: [],
     jsonProvince: [],
@@ -155,6 +158,11 @@ export default {
   methods: {
     getDatiNaz: async function () {
       this.isLoading = true;
+
+      let { data: tmpJsonNote } = await axios.get(
+        "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-note.json"
+      );
+      this.jsonNote = tmpJsonNote;
 
       let { data: tmpJsonTrendNazione } = await axios.get(
         "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json"

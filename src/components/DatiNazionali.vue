@@ -7,7 +7,7 @@
     :shaped="false"
   >
     <v-row v-if="jsonNazioneOggi" class="mx-auto">
-      <v-col lg="3" cols="6">
+      <v-col lg="2" cols="6">
         <v-card height="100%" class="" color="red" :elevation="6" outlined tile>
           <v-card-title class="text-left">
             <span class="headline font-weight-light white--text"
@@ -29,7 +29,7 @@
           >
         </v-card>
       </v-col>
-      <v-col lg="3" cols="6">
+      <v-col lg="2" cols="6">
         <v-card
           height="100%"
           class=""
@@ -61,7 +61,7 @@
           >
         </v-card>
       </v-col>
-      <v-col lg="3" cols="6">
+      <v-col lg="2" cols="6">
         <v-card
           height="100%"
           class=""
@@ -93,7 +93,7 @@
           >
         </v-card>
       </v-col>
-      <v-col lg="3" cols="6">
+      <v-col lg="2" cols="6">
         <v-card
           height="100%"
           class=""
@@ -123,6 +123,24 @@
           >
         </v-card>
       </v-col>
+      <v-col lg="4" cols="12">
+        <v-card>
+          <v-card-subtitle>Notizie</v-card-subtitle>
+          <v-list max-height="175px" class="overflow-y-auto">
+            <v-list-item-group>
+              <v-list-item dense v-for="(item, i) in jsonNoteCron" :key="i">
+                <v-list-item-content>
+                  <!-- <v-list-item-title v-text="item.note"> </v-list-item-title> -->
+                  <v-list-item-title class="text-left">
+                    {{ formatData(item.data) }}
+                  </v-list-item-title>
+                  <span class="h5 text-justify">{{ item.note }}</span>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
+      </v-col>
     </v-row>
   </v-card>
 </template>
@@ -134,13 +152,28 @@ export default {
     jsonTrendNazione: {
       type: Array,
     },
+    jsonNote: {
+      type: Array,
+    },
   },
   data: function () {
     return {};
   },
+  methods: {
+    formatData: function (data) {
+      let d = new Date(data);
+      //let datastr = d.getDay() + "/" + d.getMonth() + "/" + d.getFullYear();
+      return d.toLocaleString();
+    },
+  },
   mounted() {},
 
   computed: {
+    jsonNoteCron() {
+      let rev = this.jsonNote;
+      return rev.reverse();
+    },
+
     jsonNazioneIeri() {
       return this.jsonTrendNazione[this.jsonTrendNazione.length - 2];
     },
