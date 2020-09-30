@@ -21,11 +21,10 @@
         </v-row>
         <v-spacer></v-spacer>
         <v-row>
-          <v-col lg="3" md="12">
+          <v-col lg="3" md="12" sm="12">
             <v-card
-              height="100%"
-              width="100%"
-              class="mx-auto pa-2"
+              fill
+              class="mx-auto pa-2 fill-height"
               :elevation="6"
               :shaped="false"
             >
@@ -36,28 +35,26 @@
                 :isLoading="isLoading"
               ></italy-map>
               <v-skeleton-loader
-                height="534px !important"
                 v-else
                 class=""
                 type="card"
               ></v-skeleton-loader>
             </v-card>
           </v-col>
-          <v-col lg="5" md="12">
-            <v-card class="mx-auto pa-2" :elevation="6" :shaped="false">
+          <v-col lg="5" md="12" sm="12">
+            <v-card
+              class="mx-auto pa-2 fill-height"
+              :elevation="6"
+              :shaped="false"
+            >
               <chart-trend-nazione
                 ref="chartTrendNazione"
                 :chartData="jsonTrendNazione"
               ></chart-trend-nazione>
             </v-card>
           </v-col>
-          <v-col lg="4" md="12">
-            <v-card
-              height="550px"
-              class="mx-auto pa-2"
-              :elevation="6"
-              :shaped="false"
-            >
+          <v-col lg="4" md="12" sm="12">
+            <v-card class="mx-auto pa-2" :elevation="6" :shaped="false">
               <v-row class="mx-auto align-center">
                 <v-autocomplete
                   hide-details

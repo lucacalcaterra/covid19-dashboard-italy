@@ -1,5 +1,11 @@
 <template>
-  <apexchart type="area" ref="chart" height="350px" :options="chOptions" :series="chSeries"></apexchart>
+  <apexchart
+    type="area"
+    ref="chart"
+    height="400px"
+    :options="chOptions"
+    :series="chSeries"
+  ></apexchart>
 </template>
 
 <script>

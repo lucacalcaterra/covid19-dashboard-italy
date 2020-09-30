@@ -1,8 +1,8 @@
 <template>
   <apexchart
-    type="area"
+    type="line"
     ref="chart"
-    height="350px"
+    height="520px"
     :options="chOptions"
     :series="chSeries"
   ></apexchart>
@@ -30,12 +30,14 @@ export default {
       return {
         ...this.chartOptions,
         ...{
+          colors: ["#F44336", "#4CAF50", "#000000", "#ff9800"],
           chart: {
             id: "chart-trendNazione",
-            type: "area",
+            type: "line",
             /* animations: {
               enabled: false,
             }, */
+            //stacked: true,
             zoom: {
               enabled: false,
               autoScaleYaxis: true,
@@ -44,20 +46,20 @@ export default {
           dataLabels: {
             enabled: false,
           },
-          markers: {
-            size: 0,
-            style: "hollow",
-          },
-          /* fill: {
-              type: 'gradient',
-              gradient: {
-                shadeIntensity: 1,
-                inverseColors: false,
-                opacityFrom: 0.3,
-                opacityTo: 0.2,
-                stops: [ 800,2000]
-              },
-            }, */
+          // markers: {
+          //   size: 0,
+          //   style: "hollow",
+          // },
+          // fill: {
+          //     type: 'gradient',
+          //     gradient: {
+          //       shadeIntensity: 1,
+          //       inverseColors: false,
+          //       opacityFrom: 0.3,
+          //       opacityTo: 0.2,
+          //       stops: [ 800,2000]
+          //     },
+          //   },
           stroke: {
             curve: "smooth",
           },
