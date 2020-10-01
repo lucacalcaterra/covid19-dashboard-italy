@@ -1,4 +1,7 @@
-# Covid19-Dashboard-Italy
+# Covid19 Dashboard Italy
+
+A Vue.js Dashboard of Covid-19 in Italy
+Built with Vue.js - Vuetify - ApexCharts
 
 ## Project setup
 ```
