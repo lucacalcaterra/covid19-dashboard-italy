@@ -16,7 +16,6 @@
     "vue-apexcharts": "^1.6.0",
     "vue-loading-overlay": "^3.4.0",
     "vue2-leaflet": "^2.5.2",
-    "vue2-leaflet-heatmap": "github:C00Lzero/vue2-leaflet-heatmap",
     "vue2-leaflet-markercluster": "^3.1.0",
     "vuetify": "^2.2.11"
   },
