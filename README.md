@@ -1,4 +1,4 @@
-# covid19monitor
+# Covid19-Dashboard-Italy
 
 ## Project setup
 ```
