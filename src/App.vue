@@ -1,14 +1,11 @@
 <template>
   <v-app id="app">
-    <v-app-bar app color="primary" dark style="z-index: 1001">
+    <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-toolbar-title>Dashboard - Covid 19 - ITALIA</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
-      <v-toolbar-title class="subtitle text-right"
-        >2020 - Luca Calcaterra</v-toolbar-title
-      >
     </v-app-bar>
 
     <v-main>
@@ -48,7 +45,6 @@
           </v-col>
           <v-col lg="5" md="12" sm="12" cols="12">
             <v-card
-              fill
               width="100%"
               class="mx-auto pa-2 fill-height"
               :elevation="6"
@@ -56,10 +52,12 @@
               <v-card-subtitle class="text-subtitle-1 pa-1"
                 >Trend Nazione
               </v-card-subtitle>
-              <chart-trend-nazione
-                ref="chartTrendNazione"
-                :chartData="jsonTrendNazione"
-              ></chart-trend-nazione>
+              <v-card flat class="mt-5">
+                <chart-trend-nazione
+                  ref="chartTrendNazione"
+                  :chartData="jsonTrendNazione"
+                ></chart-trend-nazione>
+              </v-card>
             </v-card>
           </v-col>
           <v-col lg="4" md="12" sm="12" cols="12">
@@ -71,7 +69,7 @@
               <v-card-subtitle class="text-subtitle-1 pa-1"
                 >Trend Provincia
               </v-card-subtitle>
-              <v-row class="mx-auto align-center">
+              <v-row class="mx-auto align-center mt-5">
                 <v-toolbar flat>
                   <v-autocomplete
                     hide-details
@@ -95,16 +93,65 @@
                 </v-toolbar>
               </v-row>
 
-              <v-card outlined class="mt-2">
-                <!-- <p class="font-weight-black pa-2 pt-5">Provincia</p> -->
-                <chart-province
-                  ref="chartprovince"
-                  :chartData="datiTrendProvSel"
-                ></chart-province>
-              </v-card>
+              <!-- <p class="font-weight-black pa-2 pt-5">Provincia</p> -->
+              <chart-province
+                ref="chartprovince"
+                :chartData="datiTrendProvSel"
+              ></chart-province>
             </v-card>
           </v-col>
         </v-row>
+        <v-footer color="transparent" padless>
+          <v-col
+            class="d-flex text-center justify-center align-center"
+            cols="12"
+          >
+            <v-card flat class="d-flex text-center justify-center">
+              <span class="subtitle-2"
+                >2020 - Luca Calcaterra - built with
+              </span>
+              <a href="https://vuejs.org/" target="_blank">
+                <v-img
+                  class="mx-2"
+                  src="./assets/vue-logo.svg"
+                  max-height="30"
+                  max-width="30"
+                  contain
+                ></v-img>
+              </a>
+              +
+              <a href="https://vuetifyjs.com/" target="_blank">
+                <v-img
+                  class="mx-2"
+                  src="./assets/vuetify-logo.svg"
+                  max-height="30"
+                  max-width="30"
+                  contain
+                ></v-img>
+              </a>
+              +
+              <a href="https://apexcharts.com/" target="_blank">
+                <v-img
+                  class="mx-2"
+                  src="./assets/apexchart-logo.png"
+                  max-height="30"
+                  max-width="30"
+                  contain
+                ></v-img>
+              </a>
+              <v-spacer></v-spacer>
+              <a href="https://github.com/" target="_blank">
+                <v-img
+                  class="mx-2"
+                  src="./assets/github-logo.png"
+                  max-height="30"
+                  max-width="30"
+                  contain
+                ></v-img>
+              </a>
+            </v-card>
+          </v-col>
+        </v-footer>
       </v-container>
     </v-main>
   </v-app>
