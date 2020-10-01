@@ -140,7 +140,10 @@
                 ></v-img>
               </a>
               <v-spacer></v-spacer>
-              <a href="https://github.com/" target="_blank">
+              <a
+                href="https://github.com/lucacalcaterra/Covid19-Dashboard-Italy/"
+                target="_blank"
+              >
                 <v-img
                   class="mx-2"
                   src="./assets/github-logo.png"
