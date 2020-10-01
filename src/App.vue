@@ -167,7 +167,6 @@ import Loading from "vue-loading-overlay";
 // Import stylesheet
 import "vue-loading-overlay/dist/vue-loading.css";
 
-//import LineChart from "./components/LineChart";
 import DatiNazionali from "./components/DatiNazionali";
 import ChartTrendNazione from "./components/ChartTrendNazione";
 import ItalyMap from "./components/ItalyMap";
@@ -175,7 +174,6 @@ import ChartProvince from "./components/ChartProvince.vue";
 
 export default {
   components: {
-    //LineChart,
     DatiNazionali,
     ChartTrendNazione,
     ItalyMap,
