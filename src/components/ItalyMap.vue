@@ -1,16 +1,22 @@
 <template>
   <v-layout column v-resize="onResize">
-    <v-chip-group
-      @change="updateMarkers"
-      v-model="selModalita"
-      mandatory
-      active-class="primary--text"
-    >
-      <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
-    </v-chip-group>
+    <v-toolbar flat>
+      <v-chip-group
+        @change="updateMarkers"
+        v-model="selModalita"
+        mandatory
+        active-class="primary--text"
+      >
+        <v-chip v-for="modo in modalita" :key="modo">{{ modo }}</v-chip>
+        <v-spacer></v-spacer>
+      </v-chip-group>
+      <v-spacer></v-spacer>
+      <v-chip small @click="onResize()">reset zoom</v-chip>
+    </v-toolbar>
+
     <l-map
       @ready="mapReady()"
-      style="height: 486px !important ; border: 1px solid lightgray"
+      style="min-height: 466px; border: 1px solid lightgray"
       ref="mappa"
       :zoom="zoom"
       :center="center"
@@ -29,7 +35,7 @@
         :radius="heatArr[index].int"
       >
         <l-tooltip :options="{ permanent: false, interactive: false }">
-          <div @click="innerClick">
+          <div>
             <div>
               <h2>{{ marker.denominazione }}</h2>
             </div>
@@ -74,7 +80,7 @@ export default {
       modalita: ["Regioni", "Province"],
       selModalita: 1,
       //map
-      zoom: 5,
+      zoom: 5.5,
       center: latLng(42.146902, 12.502441),
       url:
         "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png",
@@ -82,7 +88,7 @@ export default {
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
       withPopup: latLng(47.41322, -1.219482),
       withTooltip: latLng(47.41422, -1.250482),
-      currentZoom: 5,
+      currentZoom: 5.5,
       //currentCenter: latLng(41.539645, 12.449227),
       showParagraph: false,
       mapOptions: {
@@ -105,9 +111,6 @@ export default {
     },
     showLongText() {
       this.showParagraph = !this.showParagraph;
-    },
-    innerClick() {
-      alert("Click!");
     },
     updateMarkers: function () {
       this.onResize();

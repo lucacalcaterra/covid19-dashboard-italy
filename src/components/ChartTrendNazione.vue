@@ -2,7 +2,8 @@
   <apexchart
     type="line"
     ref="chart"
-    height="520px"
+    min-height="520px"
+    width="100%"
     :options="chOptions"
     :series="chSeries"
   ></apexchart>
