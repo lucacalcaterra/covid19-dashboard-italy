@@ -101,12 +101,12 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-footer color="transparent" padless>
+        <v-row align="center" justify="center">
           <v-col
             class="d-flex text-center justify-center align-center"
             cols="12"
           >
-            <v-card flat class="d-flex text-center justify-center">
+            <v-card flat class="d-flex text-center justify-center align-center">
               <span class="subtitle-2"
                 >2020 - Luca Calcaterra - built with
               </span>
@@ -154,7 +154,7 @@
               </a>
             </v-card>
           </v-col>
-        </v-footer>
+        </v-row>
       </v-container>
     </v-main>
   </v-app>
