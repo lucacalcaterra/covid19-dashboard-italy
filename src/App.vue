@@ -191,7 +191,7 @@ export default {
     //drawer: null,
     isLoading: false,
     province: [],
-    selProv: "Macerata",
+    selProv: "Milano",
     selPeriodo: "",
     periodi: ["Tutto", "1 Sett.", "1 Mese", "3 Mesi", "6 Mesi"],
     jsonNote: [],
