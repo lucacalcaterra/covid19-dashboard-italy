@@ -13,6 +13,7 @@
     "leaflet": "^1.7.1",
     "moment": "^2.27.0",
     "vue": "^2.6.11",
+    "vue-analytics": "^5.22.1",
     "vue-apexcharts": "^1.6.0",
     "vue-loading-overlay": "^3.4.0",
     "vue2-leaflet": "^2.5.2",

@@ -225,6 +225,7 @@ export default {
   },
   mounted() {
     //this.isLoading=true;
+    this.$ga.page("/");
   },
 
   methods: {
