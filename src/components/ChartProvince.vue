@@ -10,6 +10,7 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+var it = require("apexcharts/dist/locales/it.json");
 
 export default {
   components: {
@@ -31,11 +32,13 @@ export default {
         ...this.chartOptions,
         ...{
           chart: {
-            //id: "vuechart-example",
+            id: "chart-trendprovince",
             type: "area",
             /* animations: {
               enabled: false,
             }, */
+            locales: [it],
+            defaultLocale: "it",
             zoom: {
               enabled: false,
               autoScaleYaxis: true,

@@ -11,6 +11,7 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+var it = require("apexcharts/dist/locales/it.json");
 
 export default {
   components: {
@@ -35,6 +36,8 @@ export default {
           chart: {
             id: "chart-trendNazione",
             type: "line",
+            locales: [it],
+            defaultLocale: "it",
             /* animations: {
               enabled: false,
             }, */
