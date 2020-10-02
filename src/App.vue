@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark style="z-index: 1001">
       <div class="d-flex align-center">
         <v-toolbar-title>Dashboard - Covid 19 - ITALIA</v-toolbar-title>
       </div>
@@ -69,29 +69,29 @@
               <v-card-subtitle class="text-subtitle-1 pa-1"
                 >Trend Provincia
               </v-card-subtitle>
-              <v-row class="mx-auto align-center mt-5">
-                <v-toolbar flat>
-                  <v-autocomplete
-                    hide-details
-                    v-model="selProv"
-                    :items="province"
-                    item-key="key"
-                    item-value="denominazione_provincia"
-                    v-on:change="upddatiTrendProvSel()"
-                    label="Provincia"
-                  ></v-autocomplete>
-                  <v-chip-group
-                    v-on:change="updPeriodo()"
-                    v-model="selPeriodo"
-                    active-class="primary--text"
-                    mandatory
-                  >
-                    <v-chip x-small v-for="periodo in periodi" :key="periodo">{{
-                      periodo
-                    }}</v-chip>
-                  </v-chip-group>
-                </v-toolbar>
-              </v-row>
+              <v-col cols="12">
+                <v-autocomplete
+                  hide-details
+                  v-model="selProv"
+                  :items="province"
+                  item-key="key"
+                  item-value="denominazione_provincia"
+                  v-on:change="upddatiTrendProvSel()"
+                  label="Provincia"
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12">
+                <v-chip-group
+                  v-on:change="updPeriodo()"
+                  v-model="selPeriodo"
+                  active-class="primary--text"
+                  mandatory
+                >
+                  <v-chip x-small v-for="periodo in periodi" :key="periodo">{{
+                    periodo
+                  }}</v-chip>
+                </v-chip-group>
+              </v-col>
 
               <!-- <p class="font-weight-black pa-2 pt-5">Provincia</p> -->
               <chart-province
