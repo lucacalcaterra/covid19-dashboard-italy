@@ -5,6 +5,8 @@ Built with Vue.js - Vuetify - ApexCharts
 
 data from : https://github.com/pcm-dpc/COVID-19 
 
+Live Website: https://covid19dashboard.lcisp.it/
+
 ## Project setup
 ```
 yarn install
