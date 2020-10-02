@@ -21,7 +21,7 @@
           <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
-            >Variazione</v-card-subtitle
+            >Variazione 24h</v-card-subtitle
           >
           <v-card-text
             class="headline text-center font-weight-light white--text"
@@ -50,7 +50,7 @@
           <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
-            >Variazione</v-card-subtitle
+            >Variazione 24h</v-card-subtitle
           >
           <v-card-text
             v-if="jsonNazioneOggi.dimessi_guariti"
@@ -83,7 +83,7 @@
           <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
-            >Variazione</v-card-subtitle
+            >Variazione 24h</v-card-subtitle
           >
           <v-card-text
             class="headline text-center font-weight-light white--text"
@@ -115,7 +115,7 @@
           <v-divider style="border-color: white"></v-divider>
           <v-card-subtitle
             class="caption text-center font-weight-light white--text"
-            >Variazione</v-card-subtitle
+            >Variazione 24h</v-card-subtitle
           >
           <v-card-text
             class="headline text-center font-weight-light white--text"
