@@ -1,6 +1,8 @@
 # build stage
 FROM node:lts-alpine as build-stage
 WORKDIR /app
+ARG VUE_APP_BACKEND_URL                       
+ENV VUE_APP_GA=$VUE_APP_GA
 COPY package*.json ./
 RUN npm install
 COPY . .

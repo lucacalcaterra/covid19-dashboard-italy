@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  covid19-dahboard-italy:
+    container_name: "covid19-dahboard-italy"     
+    env_file:
+    - ./.env
+    build:
+        context: .
+        dockerfile: Dockerfile
+        #args:
+        #    - VUE_APP_GA=django    
+    ports: 
+    - 8000:80
