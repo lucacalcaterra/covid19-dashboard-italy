@@ -1,7 +1,24 @@
 {
-  "name": "covid19monitor",
-  "version": "0.1.0",
-  "private": true,
+  "name": "covid19-dashboard-italy",
+  "version": "0.1.1",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucacalcaterra/covid19-dashboard-italy"
+  },
+  "keywords": [
+    "vue",
+    "vuetify",
+    "covid19",
+    "apexcharts",
+    "italy"
+  ],
+  "author": "Luca Calcaterra <calcaterra.luca@gmail.com> (https://www.facebook.com/luca.calcaterra)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucacalcaterra/covid19-dashboard-italy/issues"
+  },
+  "homepage": "https://github.com/lucacalcaterra/rcovid19-dashboard-italy",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
