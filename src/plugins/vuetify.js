@@ -1,12 +1,11 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
+import it from 'vuetify/es5/locale/it';
 
 //import colors from 'vuetify/lib/util/colors'
 
 
 Vue.use(Vuetify);
-
-import it from 'vuetify/es5/locale/it'
 
 export default new Vuetify({
     /* theme: {

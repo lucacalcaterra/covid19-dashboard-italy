@@ -1,6 +1,6 @@
 {
   "name": "covid19-dashboard-italy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "repository": {
     "type": "git",
@@ -35,7 +35,7 @@
     "vue-loading-overlay": "^3.4.0",
     "vue2-leaflet": "^2.5.2",
     "vue2-leaflet-markercluster": "^3.1.0",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.3.13"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
