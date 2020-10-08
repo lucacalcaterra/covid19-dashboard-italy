@@ -3,6 +3,8 @@
 A Vue.js Dashboard of Covid-19 in Italy
 Built with Vue.js - Vuetify - ApexCharts
 
+github pages demo: https://lucacalcaterra.github.io/covid19-dashboard-italy/
+
 Live Website: https://covid19dashboard.lcisp.it/
 
 data from : https://github.com/pcm-dpc/COVID-19 
