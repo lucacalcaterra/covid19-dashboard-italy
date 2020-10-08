@@ -161,7 +161,6 @@
 </template>
 
 <script>
-import colors from "vuetify/lib/util/colors";
 import axios from "axios";
 import moment from "moment";
 
@@ -204,12 +203,7 @@ export default {
     datiTrendProvSel: [],
 
     arrPositivi: [],
-    positiveChartColors: {
-      borderColor: colors.pink.darken1,
-      pointBorderColor: colors.pink.darken1,
-      pointBackgroundColor: colors.pink.lighten2,
-      backgroundColor: colors.green.lighten2,
-    },
+
     chartOptions: {
       responsive: true,
       maintainAspectRatio: false,
