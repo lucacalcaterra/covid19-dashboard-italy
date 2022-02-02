@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  covid19-dahboard-italy:
+  covid19-dashboard-italy:
     container_name: "covid19-dashboard-italy"     
     #env_file:
     #- ./.env
